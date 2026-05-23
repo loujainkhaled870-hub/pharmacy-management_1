@@ -37,8 +37,8 @@
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges28 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges29 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges30 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges23 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges24 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges15 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges16 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges3 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
@@ -56,14 +56,14 @@
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges21 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges22 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges15 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges16 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges23 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges24 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges17 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges18 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges19 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges20 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges21 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges22 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             guna2BorderlessForm1 = new Guna.UI2.WinForms.Guna2BorderlessForm(components);
             guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
             guna2ControlBox3 = new Guna.UI2.WinForms.Guna2ControlBox();
@@ -171,14 +171,12 @@
             // 
             // panMain
             // 
-            panMain.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             panMain.Controls.Add(guna2TabControl1);
-            panMain.Controls.Add(panSideNavbar);
-            panMain.CustomizableEdges = customizableEdges23;
-            panMain.Location = new Point(0, 49);
+            panMain.CustomizableEdges = customizableEdges15;
+            panMain.Location = new Point(106, 49);
             panMain.Name = "panMain";
-            panMain.ShadowDecoration.CustomizableEdges = customizableEdges24;
-            panMain.Size = new Size(938, 616);
+            panMain.ShadowDecoration.CustomizableEdges = customizableEdges16;
+            panMain.Size = new Size(833, 625);
             panMain.TabIndex = 1;
             // 
             // guna2TabControl1
@@ -195,7 +193,7 @@
             guna2TabControl1.Location = new Point(0, 0);
             guna2TabControl1.Name = "guna2TabControl1";
             guna2TabControl1.SelectedIndex = 0;
-            guna2TabControl1.Size = new Size(938, 616);
+            guna2TabControl1.Size = new Size(833, 625);
             guna2TabControl1.TabButtonHoverState.BorderColor = Color.Empty;
             guna2TabControl1.TabButtonHoverState.FillColor = Color.FromArgb(40, 52, 70);
             guna2TabControl1.TabButtonHoverState.Font = new Font("Segoe UI Semibold", 10F);
@@ -230,7 +228,7 @@
             tabPage1.Location = new Point(5, 4);
             tabPage1.Name = "tabPage1";
             tabPage1.Padding = new Padding(3);
-            tabPage1.Size = new Size(929, 608);
+            tabPage1.Size = new Size(824, 617);
             tabPage1.TabIndex = 0;
             tabPage1.Text = "tabPage1";
             tabPage1.Click += tabPage1_Click;
@@ -379,11 +377,11 @@
             dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
             guna2DataGridView1.DefaultCellStyle = dataGridViewCellStyle3;
             guna2DataGridView1.GridColor = Color.FromArgb(244, 245, 247);
-            guna2DataGridView1.Location = new Point(0, 3);
+            guna2DataGridView1.Location = new Point(6, 3);
             guna2DataGridView1.Name = "guna2DataGridView1";
             guna2DataGridView1.RowHeadersVisible = false;
             guna2DataGridView1.RowHeadersWidth = 35;
-            guna2DataGridView1.Size = new Size(496, 590);
+            guna2DataGridView1.Size = new Size(496, 605);
             guna2DataGridView1.TabIndex = 0;
             guna2DataGridView1.Theme = Guna.UI2.WinForms.Enums.DataGridViewPresetThemes.Light;
             guna2DataGridView1.ThemeStyle.AlternatingRowsStyle.BackColor = Color.FromArgb(247, 248, 249);
@@ -414,7 +412,7 @@
             tabPage2.Location = new Point(5, 4);
             tabPage2.Name = "tabPage2";
             tabPage2.Padding = new Padding(3);
-            tabPage2.Size = new Size(829, 608);
+            tabPage2.Size = new Size(824, 617);
             tabPage2.TabIndex = 1;
             tabPage2.Text = "tabPage2";
             // 
@@ -423,7 +421,7 @@
             tabPage3.BackColor = Color.FromArgb(230, 245, 235);
             tabPage3.Location = new Point(5, 4);
             tabPage3.Name = "tabPage3";
-            tabPage3.Size = new Size(829, 608);
+            tabPage3.Size = new Size(824, 617);
             tabPage3.TabIndex = 2;
             tabPage3.Text = "tabPage3";
             // 
@@ -432,7 +430,7 @@
             tabPage4.BackColor = Color.FromArgb(230, 245, 235);
             tabPage4.Location = new Point(5, 4);
             tabPage4.Name = "tabPage4";
-            tabPage4.Size = new Size(829, 608);
+            tabPage4.Size = new Size(824, 617);
             tabPage4.TabIndex = 3;
             tabPage4.Text = "tabPage4";
             // 
@@ -441,7 +439,7 @@
             tabPage5.BackColor = Color.FromArgb(230, 245, 235);
             tabPage5.Location = new Point(5, 4);
             tabPage5.Name = "tabPage5";
-            tabPage5.Size = new Size(829, 608);
+            tabPage5.Size = new Size(824, 617);
             tabPage5.TabIndex = 4;
             tabPage5.Text = "tabPage5";
             // 
@@ -450,7 +448,7 @@
             tabPage6.BackColor = Color.FromArgb(230, 245, 235);
             tabPage6.Location = new Point(5, 4);
             tabPage6.Name = "tabPage6";
-            tabPage6.Size = new Size(829, 608);
+            tabPage6.Size = new Size(824, 617);
             tabPage6.TabIndex = 5;
             tabPage6.Text = "tabPage6";
             // 
@@ -465,12 +463,12 @@
             panSideNavbar.Controls.Add(btn_Bills);
             panSideNavbar.Controls.Add(btn_expired);
             panSideNavbar.Controls.Add(btn_pos);
-            panSideNavbar.CustomizableEdges = customizableEdges21;
+            panSideNavbar.CustomizableEdges = customizableEdges23;
             panSideNavbar.FillColor = Color.FromArgb(64, 138, 113);
-            panSideNavbar.Location = new Point(0, 0);
+            panSideNavbar.Location = new Point(0, 49);
             panSideNavbar.Name = "panSideNavbar";
-            panSideNavbar.ShadowDecoration.CustomizableEdges = customizableEdges22;
-            panSideNavbar.Size = new Size(100, 616);
+            panSideNavbar.ShadowDecoration.CustomizableEdges = customizableEdges24;
+            panSideNavbar.Size = new Size(105, 625);
             panSideNavbar.TabIndex = 0;
             // 
             // btn_users
@@ -490,7 +488,7 @@
             btn_users.ImageSize = new Size(70, 70);
             btn_users.Location = new Point(5, 504);
             btn_users.Name = "btn_users";
-            btn_users.ShadowDecoration.CustomizableEdges = customizableEdges15;
+            btn_users.ShadowDecoration.CustomizableEdges = customizableEdges17;
             btn_users.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
             btn_users.Size = new Size(80, 80);
             btn_users.TabIndex = 0;
@@ -513,7 +511,7 @@
             btn_Companies.ImageSize = new Size(60, 60);
             btn_Companies.Location = new Point(5, 405);
             btn_Companies.Name = "btn_Companies";
-            btn_Companies.ShadowDecoration.CustomizableEdges = customizableEdges16;
+            btn_Companies.ShadowDecoration.CustomizableEdges = customizableEdges18;
             btn_Companies.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
             btn_Companies.Size = new Size(80, 80);
             btn_Companies.TabIndex = 5;
@@ -536,7 +534,7 @@
             btn_Medicines.ImageSize = new Size(60, 60);
             btn_Medicines.Location = new Point(5, 9);
             btn_Medicines.Name = "btn_Medicines";
-            btn_Medicines.ShadowDecoration.CustomizableEdges = customizableEdges17;
+            btn_Medicines.ShadowDecoration.CustomizableEdges = customizableEdges19;
             btn_Medicines.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
             btn_Medicines.Size = new Size(80, 80);
             btn_Medicines.TabIndex = 1;
@@ -559,7 +557,7 @@
             btn_Bills.ImageSize = new Size(60, 60);
             btn_Bills.Location = new Point(5, 306);
             btn_Bills.Name = "btn_Bills";
-            btn_Bills.ShadowDecoration.CustomizableEdges = customizableEdges18;
+            btn_Bills.ShadowDecoration.CustomizableEdges = customizableEdges20;
             btn_Bills.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
             btn_Bills.Size = new Size(80, 80);
             btn_Bills.TabIndex = 4;
@@ -582,7 +580,7 @@
             btn_expired.ImageSize = new Size(60, 60);
             btn_expired.Location = new Point(5, 108);
             btn_expired.Name = "btn_expired";
-            btn_expired.ShadowDecoration.CustomizableEdges = customizableEdges19;
+            btn_expired.ShadowDecoration.CustomizableEdges = customizableEdges21;
             btn_expired.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
             btn_expired.Size = new Size(80, 80);
             btn_expired.TabIndex = 2;
@@ -605,7 +603,7 @@
             btn_pos.ImageSize = new Size(60, 60);
             btn_pos.Location = new Point(5, 207);
             btn_pos.Name = "btn_pos";
-            btn_pos.ShadowDecoration.CustomizableEdges = customizableEdges20;
+            btn_pos.ShadowDecoration.CustomizableEdges = customizableEdges22;
             btn_pos.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
             btn_pos.Size = new Size(80, 80);
             btn_pos.TabIndex = 3;
@@ -615,8 +613,9 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(939, 666);
+            ClientSize = new Size(939, 673);
             Controls.Add(panMain);
+            Controls.Add(panSideNavbar);
             Controls.Add(guna2Panel1);
             FormBorderStyle = FormBorderStyle.None;
             Name = "Form2";
