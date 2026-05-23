@@ -5,7 +5,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace pharmacy_management_1
+namespace pharmacy_management_1.Models
 {
     internal class Medicines : Entity
     {
