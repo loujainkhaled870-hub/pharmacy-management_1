@@ -34,18 +34,11 @@ namespace pharmacy_management_1.Managers
             }
         }
         // update
-        public void UpdateMedicine(int id, Medicines updatedMedicine)
+      
+        public void UpdateMedicine(int id , Medicines updateMedicines)
         {
-            var medicine = DataStore.MedicinesList.FirstOrDefault(m => m.Id == id);
-            if (medicine != null)
-            {
-                medicine.BusinessName = updatedMedicine.BusinessName;
-                medicine.ScientificName = updatedMedicine.ScientificName;
-                medicine.Quantity = updatedMedicine.Quantity;
-                medicine.Company = updatedMedicine.Company;
-                medicine.BuyingPrice = updatedMedicine.BuyingPrice;
-                medicine.SalePrice = updatedMedicine.SalePrice;
-            }
+            
+         
         }
     }
 }
