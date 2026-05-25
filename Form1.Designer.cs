@@ -40,7 +40,7 @@
             guna2BorderlessForm1 = new Guna.UI2.WinForms.Guna2BorderlessForm(components);
             panel = new Guna.UI2.WinForms.Guna2Panel();
             label = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            guna2Button1 = new Guna.UI2.WinForms.Guna2Button();
+            btn_login = new Guna.UI2.WinForms.Guna2Button();
             txt_password = new Guna.UI2.WinForms.Guna2TextBox();
             txt_user = new Guna.UI2.WinForms.Guna2TextBox();
             timer1 = new System.Windows.Forms.Timer(components);
@@ -62,7 +62,7 @@
             panel.BorderRadius = 20;
             panel.BorderThickness = 3;
             panel.Controls.Add(label);
-            panel.Controls.Add(guna2Button1);
+            panel.Controls.Add(btn_login);
             panel.Controls.Add(txt_password);
             panel.Controls.Add(txt_user);
             panel.CustomizableEdges = customizableEdges7;
@@ -92,27 +92,27 @@
             label.Click += guna2HtmlLabel1_Click;
             label.MouseEnter += guna2HtmlLabel1_MouseEnter;
             // 
-            // guna2Button1
+            // btn_login
             // 
-            guna2Button1.Animated = true;
-            guna2Button1.BorderRadius = 10;
-            guna2Button1.CustomizableEdges = customizableEdges1;
-            guna2Button1.DisabledState.BorderColor = Color.DarkGray;
-            guna2Button1.DisabledState.CustomBorderColor = Color.DarkGray;
-            guna2Button1.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            guna2Button1.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            guna2Button1.FillColor = Color.FromArgb(64, 138, 113);
-            guna2Button1.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            guna2Button1.ForeColor = Color.White;
-            guna2Button1.HoverState.FillColor = Color.FromArgb(40, 90, 72);
-            guna2Button1.HoverState.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            guna2Button1.Location = new Point(40, 268);
-            guna2Button1.Name = "guna2Button1";
-            guna2Button1.ShadowDecoration.CustomizableEdges = customizableEdges2;
-            guna2Button1.Size = new Size(320, 45);
-            guna2Button1.TabIndex = 3;
-            guna2Button1.Text = "LOG IN";
-            guna2Button1.Click += guna2Button1_Click;
+            btn_login.Animated = true;
+            btn_login.BorderRadius = 10;
+            btn_login.CustomizableEdges = customizableEdges1;
+            btn_login.DisabledState.BorderColor = Color.DarkGray;
+            btn_login.DisabledState.CustomBorderColor = Color.DarkGray;
+            btn_login.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            btn_login.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            btn_login.FillColor = Color.FromArgb(64, 138, 113);
+            btn_login.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            btn_login.ForeColor = Color.White;
+            btn_login.HoverState.FillColor = Color.FromArgb(40, 90, 72);
+            btn_login.HoverState.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btn_login.Location = new Point(40, 268);
+            btn_login.Name = "btn_login";
+            btn_login.ShadowDecoration.CustomizableEdges = customizableEdges2;
+            btn_login.Size = new Size(320, 45);
+            btn_login.TabIndex = 3;
+            btn_login.Text = "LOG IN";
+            btn_login.Click += btn_login_Click_1;
             // 
             // txt_password
             // 
@@ -184,6 +184,7 @@
             FormBorderStyle = FormBorderStyle.None;
             Name = "Form1";
             StartPosition = FormStartPosition.CenterScreen;
+            Load += Form1_Load;
             panel.ResumeLayout(false);
             ResumeLayout(false);
         }
@@ -195,7 +196,7 @@
         private Guna.UI2.WinForms.Guna2HtmlLabel label;
         private Guna.UI2.WinForms.Guna2TextBox txt_password;
         private Guna.UI2.WinForms.Guna2TextBox txt_user;
-        private Guna.UI2.WinForms.Guna2Button guna2Button1;
+        private Guna.UI2.WinForms.Guna2Button btn_login;
         private System.Windows.Forms.Timer timer1;
     }
 }

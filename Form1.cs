@@ -1,4 +1,6 @@
 using Guna.UI2.WinForms;
+using pharmacy_management_1.Managers;
+using pharmacy_management_1.Models;
 
 namespace pharmacy_management_1
 {
@@ -107,11 +109,35 @@ namespace pharmacy_management_1
             }
         }
 
-        private void guna2Button1_Click(object sender, EventArgs e)
+        private void btn_login_Click(object sender, EventArgs e)
         {
             Form2 dashboard = new Form2();
             dashboard.Show();
             this.Hide();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btn_login_Click_1(object sender, EventArgs e)
+        {
+            string username = txt_user.Text;
+            string password = txt_password.Text;
+            UsersManager usersManager = new UsersManager();
+            Users user = usersManager.Login(username, password);
+            if (user != null)
+            {
+                Form2 dashboard = new Form2();
+                dashboard.Show();
+                this.Hide();
+            }
+            else
+            {
+                MessageBox.Show("Invalid username or password.", "Login Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
         }
     }
 }
