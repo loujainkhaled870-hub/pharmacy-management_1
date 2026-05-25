@@ -11,12 +11,12 @@ namespace pharmacy_management_1.Models
         SuperAdmin,
         Admin,
     }
-    internal class Users
+    internal class Users:Entity
     {
         public string UserName { get; set; }
         public string Password { get; set; }
         public UserRole Role { get; set; }
-        public Users(string userName , string passWord , UserRole role )
+        public Users( int id , string userName , string passWord , UserRole role ):base(id)
         {
             UserName = userName;
             Password = passWord;

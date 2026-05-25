@@ -31,14 +31,27 @@ namespace pharmacy_management_1.Managers
             if (Delete != null)
             {
                 DataStore.MedicinesList.Remove(Delete);
+                return;
             }
         }
-        // update
+        // Edit 
       
-        public void UpdateMedicine(int id , Medicines updateMedicines)
+        public void EditMedicine(int id , Medicines editMedicines)
         {
-            
-         
+
+            for (int i = 0; i < DataStore.MedicinesList.Count; i++)
+            {
+                if (DataStore.MedicinesList[i].Id == id)
+                {
+                    DataStore.MedicinesList[i].BusinessName = editMedicines.BusinessName;
+                    DataStore.MedicinesList[i].ScientificName = editMedicines.ScientificName;
+                    DataStore.MedicinesList[i].SalePrice = editMedicines.SalePrice;
+                    DataStore.MedicinesList[i].Quantity = editMedicines.Quantity;
+                    DataStore.MedicinesList[i].Company = editMedicines.Company;
+                    DataStore.MedicinesList[i].BuyingPrice = editMedicines.BuyingPrice;
+                }
+            }   
+           
         }
     }
 }
