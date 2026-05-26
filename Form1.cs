@@ -109,12 +109,12 @@ namespace pharmacy_management_1
             }
         }
 
-        private void btn_login_Click(object sender, EventArgs e)
-        {
-            Form2 dashboard = new Form2();
-            dashboard.Show();
-            this.Hide();
-        }
+        //private void btn_login_Click(object sender, EventArgs e)
+        //{
+        //    Form2 dashboard = new Form2();
+        //    dashboard.Show();
+        //    this.Hide();
+        //}
 
         private void Form1_Load(object sender, EventArgs e)
         {

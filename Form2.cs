@@ -69,5 +69,10 @@ namespace pharmacy_management_1
         {
             Application.Exit();
         }
+
+        private void guna2Button1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
