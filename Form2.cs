@@ -8,6 +8,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using pharmacy_management_1.Managers;
+using pharmacy_management_1.Models;
 
 namespace pharmacy_management_1
 {
@@ -72,7 +74,42 @@ namespace pharmacy_management_1
 
         private void guna2Button1_Click(object sender, EventArgs e)
         {
+            UsersManager manager = new UsersManager();
+            string username = txt_newusername.Text;
+            string password = txt_newpassword.Text;
+            if( username=="" || password == "")
+            {
+                MessageBox.Show("please fil in all fields before adding a user!", "validation error"
+                    , MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            UserRole SelectedRole;
+            if(cmb_Role.SelectedItem != null && cmb_Role.SelectedItem.ToString()== "SuperAdmin")
+            {
+                SelectedRole = UserRole.SuperAdmin;
+            }
+            else
+            {
+                SelectedRole = UserRole.Admin;
+            }
+        }
 
+        private void btn_showUser_Click(object sender, EventArgs e)
+        {
+            UsersManager manager = new UsersManager();
+            dgv_users.DataSource = null;
+            dgv_users.DataSource = manager.GetAllUser();
+            if (dgv_users.Columns.Count>0)
+            {
+                dgv_users.Columns["Id"].DisplayIndex = 0;
+                dgv_users.Columns["Role"].DisplayIndex = 1;
+
+                dgv_users.Columns["Role"].HeaderText = "Role";
+                dgv_users.Columns["PassWord"].HeaderText = "Password";
+                dgv_users.Columns["UserName"].HeaderText = "Username";
+                dgv_users.Columns["Id"].HeaderText = "Id";
+
+            }
         }
     }
 }
