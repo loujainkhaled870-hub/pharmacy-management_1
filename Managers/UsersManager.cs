@@ -17,8 +17,18 @@ namespace pharmacy_management_1.Managers
 
         public void AddUser(string username , string password , UserRole role)
         {
-            int newId = idCount;
-            idCount++;
+            List<Users> allUser = GetAllUser();
+            int maxId = 0;
+
+            for (int i = 0; i < allUser.Count; i++)
+            {
+                if (allUser[i].Id > maxId)
+                {
+                    maxId = allUser[i].Id;
+                }
+            }
+            int newId = maxId+1;
+            
             Users newUser = new Users (newId , username , password , role );
             DataStore.UsersList.Add( newUser );
         }

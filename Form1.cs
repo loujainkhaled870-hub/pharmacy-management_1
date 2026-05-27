@@ -123,8 +123,8 @@ namespace pharmacy_management_1
 
         private void btn_login_Click_1(object sender, EventArgs e)
         {
-            string username = txt_user.Text;
-            string password = txt_password.Text;
+            string username = txt_user.Text.Trim();
+            string password = txt_password.Text.Trim();
             UsersManager usersManager = new UsersManager();
             Users user = usersManager.Login(username, password);
             if (user != null)

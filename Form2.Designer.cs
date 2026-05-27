@@ -844,7 +844,7 @@
             btn_addUser.Size = new Size(225, 56);
             btn_addUser.TabIndex = 3;
             btn_addUser.Text = "Add";
-            btn_addUser.Click += guna2Button1_Click;
+            btn_addUser.Click += btn_addUser_Click_1;
             // 
             // cmb_Role
             // 

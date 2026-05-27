@@ -72,26 +72,9 @@ namespace pharmacy_management_1
             Application.Exit();
         }
 
-        private void guna2Button1_Click(object sender, EventArgs e)
+        private void btn_addUser_Click(object sender, EventArgs e)
         {
-            UsersManager manager = new UsersManager();
-            string username = txt_newusername.Text;
-            string password = txt_newpassword.Text;
-            if( username=="" || password == "")
-            {
-                MessageBox.Show("please fil in all fields before adding a user!", "validation error"
-                    , MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-            UserRole SelectedRole;
-            if(cmb_Role.SelectedItem != null && cmb_Role.SelectedItem.ToString()== "SuperAdmin")
-            {
-                SelectedRole = UserRole.SuperAdmin;
-            }
-            else
-            {
-                SelectedRole = UserRole.Admin;
-            }
+           
         }
 
         private void btn_showUser_Click(object sender, EventArgs e)
@@ -99,7 +82,7 @@ namespace pharmacy_management_1
             UsersManager manager = new UsersManager();
             dgv_users.DataSource = null;
             dgv_users.DataSource = manager.GetAllUser();
-            if (dgv_users.Columns.Count>0)
+            if (dgv_users.Columns.Count > 0)
             {
                 dgv_users.Columns["Id"].DisplayIndex = 0;
                 dgv_users.Columns["Role"].DisplayIndex = 1;
@@ -110,6 +93,86 @@ namespace pharmacy_management_1
                 dgv_users.Columns["Id"].HeaderText = "Id";
 
             }
+        }
+
+        private void btn_addUser_Click_1(object sender, EventArgs e)
+        {
+            UsersManager manager = new UsersManager();
+            string username = txt_newusername.Text.Trim();
+            string password = txt_newpassword.Text.Trim();
+            if (username == "" || password == "")
+            {
+                MessageBox.Show("please fill in all fields before adding a user!", "validation error"
+                    , MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            for (int i = 0; i < username.Length; i++)
+            {
+                char c = username[i];
+                if(c>= '0' && c <= '9')
+                {
+                    MessageBox.Show("Username must contain letters only ! numbers are not allowed "
+                        ,"Validation Error" , MessageBoxButtons.OK , MessageBoxIcon.Warning);
+                    return;
+                }
+            }
+            for (int i = 0; i < password.Length; i++)
+            {
+                char c = password[i];
+                if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'))
+                {
+                    MessageBox.Show("Password must contain numbers only ! letters are not allowed "
+                        , "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+            }
+
+
+            bool isUsernameExists = false;
+            List<Users> allusers = manager.GetAllUser();
+            for (int i = 0; i < allusers.Count; i++)
+            {
+                if (allusers[i].UserName.ToLower() == username.ToLower())
+                {
+                    isUsernameExists = true;
+                    break;
+                }
+            }
+            if (isUsernameExists)
+            {
+                MessageBox.Show("This username is already taken ! please choose another one "
+                    , "Registration error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            UserRole selectedRole;
+            if (cmb_Role.SelectedItem != null && cmb_Role.SelectedItem.ToString() == "SuperAdmin")
+            {
+                selectedRole = UserRole.SuperAdmin;
+            }
+            else
+            {
+                selectedRole = UserRole.Admin;
+            }
+            manager.AddUser(username, password, selectedRole);
+            MessageBox.Show($"User {username} has been add successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            dgv_users.DataSource = null;
+            dgv_users.DataSource = manager.GetAllUser();
+            if (dgv_users.Columns.Count > 0)
+            {
+                dgv_users.Columns["Id"].DisplayIndex = 0;
+                dgv_users.Columns["Role"].DisplayIndex = 1;
+
+
+                dgv_users.Columns["Role"].HeaderText = "Role";
+                dgv_users.Columns["Password"].HeaderText = "Password";
+                dgv_users.Columns["UserName"].HeaderText = "Username";
+                dgv_users.Columns["Id"].HeaderText = "Id";
+            }
+            txt_newpassword.Clear();
+            txt_newusername.Clear();
+            cmb_Role.SelectedIndex = 0;
+            txt_newusername.Focus();
         }
     }
 }
