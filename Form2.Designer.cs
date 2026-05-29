@@ -860,6 +860,7 @@
             btn_deleteCompany.Size = new Size(225, 56);
             btn_deleteCompany.TabIndex = 11;
             btn_deleteCompany.Text = "Delete";
+            btn_deleteCompany.Click += btn_deleteCompany_Click;
             // 
             // btn_editCompany
             // 
@@ -881,6 +882,7 @@
             btn_editCompany.Size = new Size(225, 56);
             btn_editCompany.TabIndex = 10;
             btn_editCompany.Text = "Edit";
+            btn_editCompany.Click += btn_editCompany_Click;
             // 
             // btn_addCompany
             // 

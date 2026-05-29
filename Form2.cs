@@ -232,7 +232,7 @@ namespace pharmacy_management_1
             }
             string name = txt_companyName.Text.Trim();
             string phone = txt_companyPhone.Text.Trim();
-            if (name == ""|| phone=="")
+            if (name == "" || phone == "")
             {
                 MessageBox.Show("please fill in all fields before adding a company!", "validation error"
                   , MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -252,7 +252,7 @@ namespace pharmacy_management_1
             for (int i = 0; i < phone.Length; i++)
             {
                 char c = phone[i];
-                if((c>='a' && c<='z')||(c>='A'&& c <= 'Z'))
+                if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'))
                 {
                     MessageBox.Show(" phone number must contain numbers only", "Validation Error"
                        , MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -296,6 +296,122 @@ namespace pharmacy_management_1
             txt_companyName.Clear();
             txt_companyPhone.Clear();
             txt_companyName.Focus();
+        }
+
+        private void btn_editCompany_Click(object sender, EventArgs e)
+        {
+            if (DataStore.CurrentUser == null || DataStore.CurrentUser.Role != UserRole.SuperAdmin)
+            {
+                MessageBox.Show("Acccess Denied! only SuperAdmin is allowed to edit company ", "Security Error"
+                   , MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                return;
+            }
+            if (dgv_company.CurrentRow == null)
+            {
+                MessageBox.Show("please select a company from the table to edit"
+                     , "Selection Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            DataGridViewRow SelectedRow = dgv_company.CurrentRow;
+            object cellValue = SelectedRow.Cells["Id"].Value;
+            int selectedCompanyId = Convert.ToInt32(cellValue);
+
+            string name = txt_companyName.Text.Trim();
+            string phone = txt_companyPhone.Text.Trim();
+            if (name == "" || phone == "")
+            {
+                MessageBox.Show("please fill in all fields before editing !", "validation error"
+                 , MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            for (int i = 0; i < name.Length; i++)
+            {
+                if (name[i] >= '0' && name[i] <= '9')
+                {
+                    MessageBox.Show("company name must contain letters only", "Validation Error"
+                       , MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+            }
+            for (int i = 0; i < phone.Length; i++)
+            {
+                char c = phone[i];
+                if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'))
+                {
+                    MessageBox.Show(" phone number must contain numbers only", "Validation Error"
+                       , MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+            }
+            CompanyManager manager = new CompanyManager();
+            manager.EditCompany(selectedCompanyId, name, phone);
+            MessageBox.Show("Company data has been edit successfully ", "Success"
+                , MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            dgv_company.DataSource = null;
+            dgv_company.DataSource = manager.GetAllCompanies();
+            if (dgv_company.Columns.Count > 0)
+            {
+                dgv_company.Columns["Id"].DisplayIndex = 0;
+                dgv_company.Columns["Name"].DisplayIndex = 1;
+                dgv_company.Columns["Phone"].DisplayIndex = 2;
+
+                dgv_company.Columns["Id"].HeaderText = "Company Id";
+                dgv_company.Columns["Name"].HeaderText = "Company Name";
+                dgv_company.Columns["Phone"].HeaderText = "Phone Number";
+            }
+
+            txt_companyName.Clear();
+            txt_companyPhone.Clear();
+            txt_companyName.Focus();
+        }
+
+        private void btn_deleteCompany_Click(object sender, EventArgs e)
+        {
+            if (DataStore.CurrentUser == null || DataStore.CurrentUser.Role != UserRole.SuperAdmin)
+            {
+                MessageBox.Show("Acccess Denied! only SuperAdmin is allowed to delete company ", "Security Error"
+                   , MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                return;
+            }
+            if (dgv_company.CurrentRow == null)
+            {
+                MessageBox.Show("please select a company from the table to delete"
+                     , "Selection Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            DataGridViewRow SelectedRow = dgv_company.CurrentRow;
+            object cellValue = SelectedRow.Cells["Id"].Value;
+            int selectedCompanyId = Convert.ToInt32(cellValue);
+
+            DialogResult dialogResult = MessageBox.Show("Are you sure you want to delete this company?","Confirmation"
+                ,MessageBoxButtons.YesNo,MessageBoxIcon.Question);
+            if (dialogResult == DialogResult.Yes)
+            {
+                CompanyManager manager = new CompanyManager();
+                manager.DeleteCompany(selectedCompanyId);
+                MessageBox.Show("Company has been delete successfully ","Successs"
+                    ,MessageBoxButtons.OK,MessageBoxIcon.Information);
+
+                dgv_company.DataSource = null;
+                dgv_company.DataSource = manager.GetAllCompanies();
+            }
+            if (dgv_company.Columns.Count > 0)
+            {
+                dgv_company.Columns["Id"].DisplayIndex = 0;
+                dgv_company.Columns["Name"].DisplayIndex = 1;
+                dgv_company.Columns["Phone"].DisplayIndex = 2;
+
+                dgv_company.Columns["Id"].HeaderText = "Company Id";
+                dgv_company.Columns["Name"].HeaderText = "Company Name";
+                dgv_company.Columns["Phone"].HeaderText = "Phone Number";
+            }
+
+            txt_companyName.Clear();
+            txt_companyPhone.Clear();
+            txt_companyName.Focus();
+
         }
     }
 }
