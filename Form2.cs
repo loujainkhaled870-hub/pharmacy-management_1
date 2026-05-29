@@ -221,5 +221,81 @@ namespace pharmacy_management_1
         {
 
         }
+
+        private void btn_addCompany_Click(object sender, EventArgs e)
+        {
+            if (DataStore.CurrentUser == null || DataStore.CurrentUser.Role != UserRole.SuperAdmin)
+            {
+                MessageBox.Show("Acccess Denied! only SuperAdmin is allowed to add company ", "Security Error"
+                   , MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                return;
+            }
+            string name = txt_companyName.Text.Trim();
+            string phone = txt_companyPhone.Text.Trim();
+            if (name == ""|| phone=="")
+            {
+                MessageBox.Show("please fill in all fields before adding a company!", "validation error"
+                  , MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            for (int i = 0; i < name.Length; i++)
+            {
+                if (name[i] >= '0' && name[i] <= '9')
+                {
+                    MessageBox.Show("company name must contain letters only", "Validation Error"
+                        , MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+            }
+
+            for (int i = 0; i < phone.Length; i++)
+            {
+                char c = phone[i];
+                if((c>='a' && c<='z')||(c>='A'&& c <= 'Z'))
+                {
+                    MessageBox.Show(" phone number must contain numbers only", "Validation Error"
+                       , MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+            }
+            CompanyManager manager = new CompanyManager();
+            bool isCompanyExists = false;
+            List<Company> allCompanies = manager.GetAllCompanies();
+
+            for (int i = 0; i < allCompanies.Count; i++)
+            {
+                if (allCompanies[i].Name.ToLower() == name.ToLower())
+                {
+                    isCompanyExists = true;
+                    break;
+                }
+            }
+            if (isCompanyExists)
+            {
+                MessageBox.Show("this company name already exists", "Registration Error"
+                    , MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            manager.AddCompany(name, phone);
+            MessageBox.Show($"company {name} has been added successfuly ", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            dgv_company.DataSource = null;
+            dgv_company.DataSource = manager.GetAllCompanies();
+            if (dgv_company.Columns.Count > 0)
+            {
+                dgv_company.Columns["Id"].DisplayIndex = 0;
+                dgv_company.Columns["Name"].DisplayIndex = 1;
+                dgv_company.Columns["Phone"].DisplayIndex = 2;
+
+                dgv_company.Columns["Id"].HeaderText = "Company Id";
+                dgv_company.Columns["Name"].HeaderText = "Company Name";
+                dgv_company.Columns["Phone"].HeaderText = "Phone Number";
+            }
+
+            txt_companyName.Clear();
+            txt_companyPhone.Clear();
+            txt_companyName.Focus();
+        }
     }
 }

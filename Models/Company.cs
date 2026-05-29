@@ -9,9 +9,12 @@ namespace pharmacy_management_1.Models
     internal class Company : Entity
     {
         public string Name { get; set; }
-        public Company(int id, string name) : base(id)
+
+        public string Phone { get; set; }
+        public Company(int id, string name, string phone) : base(id)
         {
             Name = name;
+            Phone = phone;
         }
         public override string ToString()
         {
