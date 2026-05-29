@@ -71,6 +71,8 @@ namespace pharmacy_management_1.Managers
             {
                 if (DataStore.UsersList[i].UserName == usernamwe && DataStore.UsersList[i].Password == password)
                 {
+                    //لحفظ المستخدم الحالي  
+                    DataStore.CurrentUser = DataStore.UsersList[i];
                     return DataStore.UsersList[i];
                 }
             }

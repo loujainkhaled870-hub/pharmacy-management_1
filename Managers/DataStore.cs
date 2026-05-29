@@ -15,6 +15,7 @@ namespace pharmacy_management_1.Managers
         //public static List<Medicines> ActiveMedicinesList = new List<Medicines>();
         public static List<Medicines> ExpiredMedicinesList = new List<Medicines>();
         public static List<Users> UsersList = new List<Users>();
+        public static Users CurrentUser = null;
         static DataStore()
         {
             UsersList.Add(new Users(1, "superadmin", "12345678", UserRole.SuperAdmin));

@@ -74,7 +74,7 @@ namespace pharmacy_management_1
 
         private void btn_addUser_Click(object sender, EventArgs e)
         {
-           
+
         }
 
         private void btn_showUser_Click(object sender, EventArgs e)
@@ -97,6 +97,12 @@ namespace pharmacy_management_1
 
         private void btn_addUser_Click_1(object sender, EventArgs e)
         {
+            if (DataStore.CurrentUser == null || DataStore.CurrentUser.Role != UserRole.SuperAdmin)
+            {
+                MessageBox.Show("Acccess Denied! only SuperAdmin is allowed to add new user ", "Security Error"
+                   , MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                return;
+            }
             UsersManager manager = new UsersManager();
             string username = txt_newusername.Text.Trim();
             string password = txt_newpassword.Text.Trim();
@@ -110,10 +116,10 @@ namespace pharmacy_management_1
             for (int i = 0; i < username.Length; i++)
             {
                 char c = username[i];
-                if(c>= '0' && c <= '9')
+                if (c >= '0' && c <= '9')
                 {
                     MessageBox.Show("Username must contain letters only ! numbers are not allowed "
-                        ,"Validation Error" , MessageBoxButtons.OK , MessageBoxIcon.Warning);
+                        , "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
             }
@@ -173,6 +179,47 @@ namespace pharmacy_management_1
             txt_newusername.Clear();
             cmb_Role.SelectedIndex = 0;
             txt_newusername.Focus();
+        }
+
+        private void btn_deleteUser_Click(object sender, EventArgs e)
+        {
+            if (DataStore.CurrentUser == null || DataStore.CurrentUser.Role != UserRole.SuperAdmin)
+            {
+                MessageBox.Show("Acccess Denied! only SuperAdmin is allowed to delete users ", "Security Error"
+                   , MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                return;
+            }
+            if (dgv_users.CurrentRow == null)
+            {
+                MessageBox.Show("please select a user from the table to delete  "
+                       , "Selection Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            DataGridViewRow SelectedRow = dgv_users.CurrentRow;
+            object cellvalue = SelectedRow.Cells["Id"].Value;
+            int selectedUserId = Convert.ToInt32(cellvalue);
+
+        }
+
+        private void dtn_editUser_Click(object sender, EventArgs e)
+        {
+            if (DataStore.CurrentUser == null || DataStore.CurrentUser.Role != UserRole.SuperAdmin)
+            {
+                MessageBox.Show("Acccess Denied! only SuperAdmin is allowed to delete users ", "Security Error"
+                   , MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                return;
+            }
+            if (dgv_users.CurrentRow == null)
+            {
+                MessageBox.Show("please select a user from the table to edit"
+                      , "Selection Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
+
+        }
+
+        private void dgv_users_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }
