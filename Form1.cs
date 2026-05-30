@@ -133,11 +133,11 @@ namespace pharmacy_management_1
                 dashboard.Show();
                 this.Hide();
             }
-            else
+            else 
             {
                 MessageBox.Show("Invalid username or password.", "Login Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
+           
         }
     }
 }

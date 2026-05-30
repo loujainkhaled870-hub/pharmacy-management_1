@@ -9,49 +9,53 @@ namespace pharmacy_management_1.Managers
 {
     internal class MedicinesManager
     {
-        // add
-        //public void AddMedicine(Medicines medicine)
-        //{
-        //    DataStore.MedicinesList.Add(medicine);
-        //}
-        // delete
-        public void DeleteMedicine(int id)
+        public List<Medicines> GetAllActiveMedicinies()
         {
-            Medicines Delete = null;
-
-            for (int i = 0; i < DataStore.MedicinesList.Count; i++)
+           return DataStore.ActiveMedicinesList;
+        }
+        public void AddMedicine(Medicines newMedicine)
+        {
+            DataStore.ActiveMedicinesList.Add(newMedicine);
+        }
+        public void EditMedicines(Medicines EditMedicine)
+        {
+            for (int i = 0; i < DataStore.ActiveMedicinesList.Count; i++)
             {
-                if (DataStore.MedicinesList[i].Id == id)
+                if (DataStore.ActiveMedicinesList[i].Id == EditMedicine.Id)
                 {
-                    Delete = DataStore.MedicinesList[i];
                     break;
                 }
             }
-
-            if (Delete != null)
-            {
-                DataStore.MedicinesList.Remove(Delete);
-                return;
-            }
         }
-        // Edit 
-      
-        public void EditMedicine(int id , Medicines editMedicines)
+       
+        public void DeleteActiveMedicine(int id)
         {
 
-            for (int i = 0; i < DataStore.MedicinesList.Count; i++)
+            for (int i = 0; i <DataStore.ActiveMedicinesList.Count; i++)
             {
-                if (DataStore.MedicinesList[i].Id == id)
+                if (DataStore.ActiveMedicinesList[i].Id == id)
                 {
-                    DataStore.MedicinesList[i].BusinessName = editMedicines.BusinessName;
-                    DataStore.MedicinesList[i].ScientificName = editMedicines.ScientificName;
-                    DataStore.MedicinesList[i].SalePrice = editMedicines.SalePrice;
-                    DataStore.MedicinesList[i].Quantity = editMedicines.Quantity;
-                    DataStore.MedicinesList[i].Company = editMedicines.Company;
-                    DataStore.MedicinesList[i].BuyingPrice = editMedicines.BuyingPrice;
+                    DataStore.ActiveMedicinesList.Remove(DataStore.ActiveMedicinesList[i]);
+                    break;
                 }
-            }   
-           
+            }
+        }
+        
+        public List<Medicines> GetAllExpiredMedicinies()
+        {
+            return DataStore.ExpiredMedicinesList;
+        }
+        public void DestoryExpiredMedicine(int id)
+        {
+
+            for (int i = 0; i <DataStore.ExpiredMedicinesList.Count; i++)
+            {
+                if (DataStore.ExpiredMedicinesList[i].Id == id)
+                {
+                    DataStore.ExpiredMedicinesList.Remove(DataStore.ExpiredMedicinesList[i]);
+                    break;
+                }
+            }
         }
     }
 }

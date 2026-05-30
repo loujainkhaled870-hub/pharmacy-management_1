@@ -385,14 +385,14 @@ namespace pharmacy_management_1
             object cellValue = SelectedRow.Cells["Id"].Value;
             int selectedCompanyId = Convert.ToInt32(cellValue);
 
-            DialogResult dialogResult = MessageBox.Show("Are you sure you want to delete this company?","Confirmation"
-                ,MessageBoxButtons.YesNo,MessageBoxIcon.Question);
+            DialogResult dialogResult = MessageBox.Show("Are you sure you want to delete this company?", "Confirmation"
+                , MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (dialogResult == DialogResult.Yes)
             {
                 CompanyManager manager = new CompanyManager();
                 manager.DeleteCompany(selectedCompanyId);
-                MessageBox.Show("Company has been delete successfully ","Successs"
-                    ,MessageBoxButtons.OK,MessageBoxIcon.Information);
+                MessageBox.Show("Company has been delete successfully ", "Successs"
+                    , MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 dgv_company.DataSource = null;
                 dgv_company.DataSource = manager.GetAllCompanies();
@@ -411,6 +411,42 @@ namespace pharmacy_management_1
             txt_companyName.Clear();
             txt_companyPhone.Clear();
             txt_companyName.Focus();
+
+        }
+
+        private void dgv_company_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (dgv_company.CurrentRow != null)
+            {
+                txt_companyName.Text = dgv_company.CurrentRow.Cells["Name"].Value.ToString();
+                txt_companyPhone.Text = dgv_company.CurrentRow.Cells["phone"].Value.ToString();
+            }
+        }
+
+        private void btn_showCompany_Click(object sender, EventArgs e)
+        {
+            CompanyManager manager = new CompanyManager();
+            dgv_company.DataSource = null;
+            dgv_company.DataSource = manager.GetAllCompanies();
+            if (dgv_company.Columns.Count > 0)
+            {
+                dgv_company.Columns["Id"].DisplayIndex = 0;
+                dgv_company.Columns["Name"].DisplayIndex = 1;
+                dgv_company.Columns["Phone"].DisplayIndex = 2;
+
+                dgv_company.Columns["Id"].HeaderText = "Company Id";
+                dgv_company.Columns["Name"].HeaderText = "Company Name";
+                dgv_company.Columns["Phone"].HeaderText = "Phone Number";
+            }
+        }
+
+        private void Form2_Load(object sender, EventArgs e)
+        {
+            btn_Medicines.Checked = true;
+        }
+
+        private void guna2TextBox7_TextChanged(object sender, EventArgs e)
+        {
 
         }
     }
