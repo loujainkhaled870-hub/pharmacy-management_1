@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Security.Cryptography;
 using System.Threading.Tasks;
 using pharmacy_management_1.Models;
 
@@ -14,7 +15,20 @@ namespace pharmacy_management_1.Managers
         {
             return DataStore.UsersList;
         }
+        public string ComputeSha256Hash(string rawData)
+        {
+            using (SHA256 sha256Hash = SHA256.Create())
+            {
+                byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(rawData));
+                StringBuilder builder = new StringBuilder();
 
+                for (int i = 0; i < bytes.Length; i++)
+                {
+                    builder.Append(bytes[i].ToString("x2"));
+                }
+                return builder.ToString();
+            }
+        }
         public void AddUser(string username , string password , UserRole role)
         {
             List<Users> allUser = GetAllUser();
@@ -28,8 +42,8 @@ namespace pharmacy_management_1.Managers
                 }
             }
             int newId = maxId+1;
-            
-            Users newUser = new Users (newId , username , password , role );
+            string hashedPassword = ComputeSha256Hash(password);
+            Users newUser = new Users (newId , username , hashedPassword , role );
             DataStore.UsersList.Add( newUser );
         }
         public void DeleteUser(int id)
@@ -57,7 +71,7 @@ namespace pharmacy_management_1.Managers
                 if (DataStore.UsersList[i].Id == id)
                 {
                     DataStore.UsersList[i].UserName = EditUserData.UserName;
-                    DataStore.UsersList [i].Password = EditUserData.Password;
+                    DataStore.UsersList [i].Password = ComputeSha256Hash(EditUserData.Password);
                     DataStore.UsersList[i].Role = EditUserData.Role;
                     return;
                 }
@@ -66,10 +80,10 @@ namespace pharmacy_management_1.Managers
         }
         public Users Login(string usernamwe , string password)
         {
-
+            string hashedInput = ComputeSha256Hash(password);
             for (int i = 0; i < DataStore.UsersList.Count; i++)
             {
-                if (DataStore.UsersList[i].UserName == usernamwe && DataStore.UsersList[i].Password == password)
+                if (DataStore.UsersList[i].UserName == usernamwe && DataStore.UsersList[i].Password == hashedInput)
                 {
                     //لحفظ المستخدم الحالي  
                     DataStore.CurrentUser = DataStore.UsersList[i];
