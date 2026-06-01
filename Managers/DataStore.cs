@@ -20,6 +20,9 @@ namespace pharmacy_management_1.Managers
         {
             UsersList.Add(new Users(1, "superadmin", "ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f", UserRole.SuperAdmin));
             UsersList.Add(new Users(2, "admin", "03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4", UserRole.Admin));
+            CompaniesList.Add(new Company(1,"Thameco","011_444567"));
+            CompaniesList.Add(new Company(2, "Diamond pharma", "031_222987"));
+            CompaniesList.Add(new Company(3, "Alpha pharma", "021_333456"));
         }
         //
     }

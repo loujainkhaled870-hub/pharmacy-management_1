@@ -72,11 +72,7 @@ namespace pharmacy_management_1
             Application.Exit();
         }
 
-        private void btn_addUser_Click(object sender, EventArgs e)
-        {
-
-        }
-
+        //////////////////////////////////////////////////////////////////
         private void btn_showUser_Click(object sender, EventArgs e)
         {
             UsersManager manager = new UsersManager();
@@ -95,6 +91,7 @@ namespace pharmacy_management_1
             }
         }
 
+        //////////////////////////////////////////////////////////////////
         private void btn_addUser_Click_1(object sender, EventArgs e)
         {
             if (DataStore.CurrentUser == null || DataStore.CurrentUser.Role != UserRole.SuperAdmin)
@@ -181,6 +178,7 @@ namespace pharmacy_management_1
             txt_newusername.Focus();
         }
 
+        //////////////////////////////////////////////////////////////////
         private void btn_deleteUser_Click(object sender, EventArgs e)
         {
             if (DataStore.CurrentUser == null || DataStore.CurrentUser.Role != UserRole.SuperAdmin)
@@ -200,6 +198,7 @@ namespace pharmacy_management_1
 
         }
 
+        //////////////////////////////////////////////////////////////////
         private void dtn_editUser_Click(object sender, EventArgs e)
         {
             if (DataStore.CurrentUser == null || DataStore.CurrentUser.Role != UserRole.SuperAdmin)
@@ -217,11 +216,8 @@ namespace pharmacy_management_1
 
         }
 
-        private void dgv_users_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
 
-        }
-
+        //////////////////////////////////////////////////////////////////
         private void btn_addCompany_Click(object sender, EventArgs e)
         {
             if (DataStore.CurrentUser == null || DataStore.CurrentUser.Role != UserRole.SuperAdmin)
@@ -298,6 +294,7 @@ namespace pharmacy_management_1
             txt_companyName.Focus();
         }
 
+        //////////////////////////////////////////////////////////////////
         private void btn_editCompany_Click(object sender, EventArgs e)
         {
             if (DataStore.CurrentUser == null || DataStore.CurrentUser.Role != UserRole.SuperAdmin)
@@ -367,6 +364,7 @@ namespace pharmacy_management_1
             txt_companyName.Focus();
         }
 
+        //////////////////////////////////////////////////////////////////
         private void btn_deleteCompany_Click(object sender, EventArgs e)
         {
             if (DataStore.CurrentUser == null || DataStore.CurrentUser.Role != UserRole.SuperAdmin)
@@ -423,6 +421,8 @@ namespace pharmacy_management_1
             }
         }
 
+
+        //////////////////////////////////////////////////////////////////
         private void btn_showCompany_Click(object sender, EventArgs e)
         {
             CompanyManager manager = new CompanyManager();
@@ -443,11 +443,120 @@ namespace pharmacy_management_1
         private void Form2_Load(object sender, EventArgs e)
         {
             btn_Medicines.Checked = true;
+
+            CompanyManager companyManager = new CompanyManager();
+            List<Company> list = companyManager.GetAllCompanies();
+            cmb_company.DataSource = null;
+            cmb_company.DataSource = list;
+            cmb_company.DisplayMember = "Name";
+            cmb_company.SelectedIndex = -1;
+
         }
 
-        private void guna2TextBox7_TextChanged(object sender, EventArgs e)
+        
+        ////// //////////////////////////////////////////////////////////////////
+        private void btn_addMedicine_Click(object sender, EventArgs e)
         {
+            string businessname = txt_businessname.Text.Trim();
+            string scientificname = txt_scientificename.Text.Trim();
+            string quantity = txt_quantity.Text.Trim();
+            string buyingPrice = txt_buyingPrice.Text.Trim();
+            string salePrice = txt_salePrice.Text.Trim();
+            string company = cmb_company.Text.Trim();
+            DateTime expirydate = date_expiry.Value;
+            if (businessname == "" || scientificname == "" || quantity == "" || buyingPrice == "" || salePrice == "" || company == "")
+            {
+                MessageBox.Show("please fill in all fields before adding !", "validation error"
+                , MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
 
+            for (int i = 0; i < quantity.Length; i++)
+            {
+                if (quantity[i] < '0' || quantity[i] > '9')
+                {
+                    MessageBox.Show(" quantity must be a valid number !", "validation error"
+                      , MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+            }
+
+            for (int i = 0; i < buyingPrice.Length; i++)
+            {
+                if (buyingPrice[i]<'0' || buyingPrice[i]>'9')
+                {
+                    MessageBox.Show(" buying price must be a valid number !", "validation error"
+                     , MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+            }
+            for (int i = 0; i < salePrice.Length; i++)
+            {
+                if (salePrice[i] < '0' || salePrice[i] > '9')
+                {
+                    MessageBox.Show(" sale price must be a valid number !", "validation error"
+                     , MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+            }
+            int quantityValue = Convert.ToInt32(quantity);
+            decimal buyingPriceValue = Convert.ToDecimal(buyingPrice);
+            decimal salePriceValue = Convert.ToDecimal(salePrice);
+
+            if (salePriceValue < buyingPriceValue)
+            {
+                MessageBox.Show("Sale price cannot be less than buying price! the pharmacy will hit a loss","Financial Error" 
+                    , MessageBoxButtons.OK ,MessageBoxIcon.Error);
+                return;
+            }
+
+           MedicinesManager manager = new MedicinesManager();
+            CompanyManager companyManager = new CompanyManager();
+            Company SelectedCompanyObject = null;
+            List<Company> allCompanies = companyManager.GetAllCompanies();
+
+            for (int i = 0; i < allCompanies.Count; i++)
+            {
+                if (allCompanies[i].Name.ToLower() == company.ToLower())
+                {
+                    SelectedCompanyObject = allCompanies[i];    
+                    break;
+                }
+            }
+            if(SelectedCompanyObject == null)
+            {
+                MessageBox.Show("the selected company was not found in the system","Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                return;
+            }
+            Medicines newMedicine = new Medicines(0,businessname,scientificname, quantityValue ,SelectedCompanyObject 
+                ,buyingPriceValue,salePriceValue,expirydate);
+           bool isAdded= manager.AddMedicine(newMedicine);
+            if (isAdded == false)
+            {
+                MessageBox.Show("this medicine already exists in the system " ,"Duplicate Error" 
+                    , MessageBoxButtons.OK , MessageBoxIcon.Warning);
+            }
+            MessageBox.Show($"Medicine {businessname} has been added successfully ", "Success"
+                , MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            dgv_medicine.DataSource = null;
+            dgv_medicine.DataSource = manager.GetAllActiveMedicinies();
+            if (dgv_medicine.Columns.Count>0)
+            {
+                dgv_medicine.Columns["Id"].DisplayIndex = 0;
+            }
+
+            txt_businessname.Clear();
+            txt_buyingPrice.Clear();
+            txt_salePrice.Clear();
+            txt_scientificename.Clear();
+            txt_quantity.Clear();
+            txt_businessname.Focus();
         }
+
+        //////////////////////////////////////////////////////////////
+        
+
+
     }
 }

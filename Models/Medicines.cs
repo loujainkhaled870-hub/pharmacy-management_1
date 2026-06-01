@@ -16,10 +16,11 @@ namespace pharmacy_management_1.Models
         public Company Company { get; set; }
         public decimal BuyingPrice { get; set; }
         public decimal SalePrice { get; set; }
+        public DateTime ExpiryDate { get; set; }
 
         public Medicines(int id, string businessName,
             string scientificName, int quantity, Company company, decimal buyingPrice,
-            decimal salePrice) : base(id)
+            decimal salePrice , DateTime expirydate) : base(id)
         {
             BusinessName = businessName;
             ScientificName = scientificName;
@@ -27,6 +28,7 @@ namespace pharmacy_management_1.Models
             Company = company;
             BuyingPrice = buyingPrice;
             SalePrice = salePrice;
+            ExpiryDate = expirydate;
         }
 
     }

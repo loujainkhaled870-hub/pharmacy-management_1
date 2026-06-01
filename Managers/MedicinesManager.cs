@@ -13,9 +13,29 @@ namespace pharmacy_management_1.Managers
         {
            return DataStore.ActiveMedicinesList;
         }
-        public void AddMedicine(Medicines newMedicine)
+        public bool AddMedicine(Medicines newMedicine)
         {
+
+            for (int i = 0; i < DataStore.ActiveMedicinesList.Count; i++)
+            {
+                if (DataStore.ActiveMedicinesList[i].BusinessName.ToLower()==newMedicine.BusinessName.ToLower() 
+                    && DataStore.ActiveMedicinesList[i].ScientificName.ToLower() == newMedicine.ScientificName.ToLower())
+                {
+                    return false;
+                }
+            }
+            int maxId = 0;
+
+            for (int i = 0; i < DataStore.ActiveMedicinesList.Count; i++)
+            {
+                if (DataStore.ActiveMedicinesList[i].Id > maxId)
+                {
+                    maxId = DataStore.ActiveMedicinesList[i].Id;
+                }
+            }
+            newMedicine.Id = maxId + 1;
             DataStore.ActiveMedicinesList.Add(newMedicine);
+            return true;
         }
         public void EditMedicines(Medicines EditMedicine)
         {
@@ -23,6 +43,13 @@ namespace pharmacy_management_1.Managers
             {
                 if (DataStore.ActiveMedicinesList[i].Id == EditMedicine.Id)
                 {
+                    DataStore.ActiveMedicinesList[i].BusinessName = EditMedicine.BusinessName;
+                    DataStore.ActiveMedicinesList[i].ScientificName = EditMedicine.ScientificName;
+                    DataStore.ActiveMedicinesList[i].BuyingPrice = EditMedicine.BuyingPrice;
+                    DataStore.ActiveMedicinesList[i].SalePrice = EditMedicine.SalePrice;
+                    DataStore.ExpiredMedicinesList[i].Company = EditMedicine.Company;
+                    DataStore.ActiveMedicinesList[i].Quantity = EditMedicine.Quantity;
+                    DataStore.ActiveMedicinesList[i].ExpiryDate = EditMedicine.ExpiryDate;
                     break;
                 }
             }
@@ -57,5 +84,6 @@ namespace pharmacy_management_1.Managers
                 }
             }
         }
+
     }
 }
