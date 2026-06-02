@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using pharmacy_management_1.Managers;
 using pharmacy_management_1.Models;
+using System.Diagnostics.Eventing.Reader;
 
 namespace pharmacy_management_1
 {
@@ -453,7 +454,7 @@ namespace pharmacy_management_1
 
         }
 
-        
+
         ////// //////////////////////////////////////////////////////////////////
         private void btn_addMedicine_Click(object sender, EventArgs e)
         {
@@ -483,7 +484,7 @@ namespace pharmacy_management_1
 
             for (int i = 0; i < buyingPrice.Length; i++)
             {
-                if (buyingPrice[i]<'0' || buyingPrice[i]>'9')
+                if (buyingPrice[i] < '0' || buyingPrice[i] > '9')
                 {
                     MessageBox.Show(" buying price must be a valid number !", "validation error"
                      , MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -505,12 +506,12 @@ namespace pharmacy_management_1
 
             if (salePriceValue < buyingPriceValue)
             {
-                MessageBox.Show("Sale price cannot be less than buying price! the pharmacy will hit a loss","Financial Error" 
-                    , MessageBoxButtons.OK ,MessageBoxIcon.Error);
+                MessageBox.Show("Sale price cannot be less than buying price! the pharmacy will hit a loss", "Financial Error"
+                    , MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-           MedicinesManager manager = new MedicinesManager();
+            MedicinesManager manager = new MedicinesManager();
             CompanyManager companyManager = new CompanyManager();
             Company SelectedCompanyObject = null;
             List<Company> allCompanies = companyManager.GetAllCompanies();
@@ -519,29 +520,29 @@ namespace pharmacy_management_1
             {
                 if (allCompanies[i].Name.ToLower() == company.ToLower())
                 {
-                    SelectedCompanyObject = allCompanies[i];    
+                    SelectedCompanyObject = allCompanies[i];
                     break;
                 }
             }
-            if(SelectedCompanyObject == null)
+            if (SelectedCompanyObject == null)
             {
-                MessageBox.Show("the selected company was not found in the system","Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                MessageBox.Show("the selected company was not found in the system", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            Medicines newMedicine = new Medicines(0,businessname,scientificname, quantityValue ,SelectedCompanyObject 
-                ,buyingPriceValue,salePriceValue,expirydate);
-           bool isAdded= manager.AddMedicine(newMedicine);
+            Medicines newMedicine = new Medicines(0, businessname, scientificname, quantityValue, SelectedCompanyObject
+                , buyingPriceValue, salePriceValue, expirydate);
+            bool isAdded = manager.AddMedicine(newMedicine);
             if (isAdded == false)
             {
-                MessageBox.Show("this medicine already exists in the system " ,"Duplicate Error" 
-                    , MessageBoxButtons.OK , MessageBoxIcon.Warning);
+                MessageBox.Show("this medicine already exists in the system ", "Duplicate Error"
+                    , MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             MessageBox.Show($"Medicine {businessname} has been added successfully ", "Success"
                 , MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             dgv_medicine.DataSource = null;
-            dgv_medicine.DataSource = manager.GetAllActiveMedicinies();
-            if (dgv_medicine.Columns.Count>0)
+            dgv_medicine.DataSource = manager.GetAllActiveMedicines();
+            if (dgv_medicine.Columns.Count > 0)
             {
                 dgv_medicine.Columns["Id"].DisplayIndex = 0;
             }
@@ -553,10 +554,202 @@ namespace pharmacy_management_1
             txt_quantity.Clear();
             txt_businessname.Focus();
         }
-
         //////////////////////////////////////////////////////////////
-        
+
+        private void btn_deleteMedicine_Click(object sender, EventArgs e)
+        {
+
+            if (dgv_medicine.CurrentRow == null)
+            {
+                MessageBox.Show("Please select a medicine from the table to delete!", "Selection Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            DataGridViewRow selectedRow = dgv_medicine.CurrentRow;
+            object cellValue = selectedRow.Cells["Id"].Value;
+            int selectedMedId = Convert.ToInt32(cellValue);
+            string medName = selectedRow.Cells["BusinessName"].Value.ToString();
+            DialogResult dialogResult = MessageBox.Show($"Are you sure you want to delete the medicine '{medName}'?", "Confirmation"
+               , MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (dialogResult == DialogResult.Yes)
+            {
+                MedicinesManager manager = new MedicinesManager();
+                manager.DeleteActiveMedicine(selectedMedId);
+                MessageBox.Show("Medicine deleted successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                dgv_medicine.DataSource = null;
+                dgv_medicine.DataSource = manager.GetAllActiveMedicines();
+            }
+            if (dgv_medicine.Columns.Count > 0)
+            {
+                dgv_medicine.Columns["Id"].DisplayIndex = 0;
+            }
+            txt_businessname.Clear();
+            txt_buyingPrice.Clear();
+            txt_salePrice.Clear();
+            txt_scientificename.Clear();
+            txt_quantity.Clear();
+            cmb_company.Items.Clear();
+            txt_businessname.Focus();
+        }
+
+        private void dgv_medicine_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+            if (dgv_medicine.CurrentRow != null)
+            {
+                txt_businessname.Text = dgv_medicine.CurrentRow.Cells["BusinessName"].Value.ToString();
+                txt_scientificename.Text = dgv_medicine.CurrentRow.Cells["ScientificName"].Value.ToString();
+                txt_quantity.Text = dgv_medicine.CurrentRow.Cells["Quantity"].Value.ToString();
+                txt_buyingPrice.Text = dgv_medicine.CurrentRow.Cells["BuyingPrice"].Value.ToString();
+                txt_salePrice.Text = dgv_medicine.CurrentRow.Cells["SalePrice"].Value.ToString();
+                date_expiry.Value = Convert.ToDateTime(dgv_medicine.CurrentRow.Cells["ExpiryDate"].Value);
+                Company comp = (Company)dgv_medicine.CurrentRow.Cells["Company"].Value;
+                cmb_company.Text = comp.Name;
+            }
+        }
 
 
+        /////////////////////////////////////////////////////////////////////////////////////
+
+        private void btn_editMedicine_Click(object sender, EventArgs e)
+        {
+
+            if (dgv_medicine.CurrentRow == null)
+            {
+                MessageBox.Show("please select a medicine from the table to edit"
+                     , "Selection Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            string businessname = txt_businessname.Text.Trim();
+            string scientificname = txt_scientificename.Text.Trim();
+            string quantity = txt_quantity.Text.Trim();
+            string buyingPrice = txt_buyingPrice.Text.Trim();
+            string salePrice = txt_salePrice.Text.Trim();
+            string company = cmb_company.Text.Trim();
+            DateTime expirydate = date_expiry.Value;
+            if (businessname == "" || scientificname == "" || quantity == "" || buyingPrice == "" || salePrice == "" || company == "")
+            {
+                MessageBox.Show("please fill in all fields before editing !", "validation error"
+                , MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            for (int i = 0; i < quantity.Length; i++)
+            {
+                if (quantity[i] < '0' || quantity[i] > '9')
+                {
+                    MessageBox.Show(" quantity must be a valid number !", "validation error"
+                      , MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+            }
+
+            for (int i = 0; i < buyingPrice.Length; i++)
+            {
+                if (buyingPrice[i] < '0' || buyingPrice[i] > '9')
+                {
+                    MessageBox.Show(" buying price must be a valid number !", "validation error"
+                     , MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+            }
+            for (int i = 0; i < salePrice.Length; i++)
+            {
+                if (salePrice[i] < '0' || salePrice[i] > '9')
+                {
+                    MessageBox.Show(" sale price must be a valid number !", "validation error"
+                     , MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+            }
+            int quantityValue = Convert.ToInt32(quantity);
+            decimal buyingPriceValue = Convert.ToDecimal(buyingPrice);
+            decimal salePriceValue = Convert.ToDecimal(salePrice);
+
+            if (salePriceValue < buyingPriceValue)
+            {
+                MessageBox.Show("Sale price cannot be less than buying price! the pharmacy will hit a loss", "Financial Error"
+                    , MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            CompanyManager companyManager = new CompanyManager();
+            Company SelectedCompanyObject = null;
+            List<Company> allCompanies = companyManager.GetAllCompanies();
+
+            for (int i = 0; i < allCompanies.Count; i++)
+            {
+                if (allCompanies[i].Name.ToLower() == company.ToLower())
+                {
+                    SelectedCompanyObject = allCompanies[i];
+                    break;
+                }
+            }
+            if (SelectedCompanyObject == null)
+            {
+                MessageBox.Show("the selected company was not found in the system", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            int selectedMedId = Convert.ToInt32(dgv_medicine.CurrentRow.Cells["Id"].Value);
+            Medicines editedMed = new Medicines(selectedMedId, businessname, scientificname
+                , quantityValue, SelectedCompanyObject, buyingPriceValue, salePriceValue, expirydate);
+            MedicinesManager manager = new MedicinesManager();
+            bool success = manager.EditMedicines(editedMed);
+            if (success)
+            {
+                MessageBox.Show($"Medicine {businessname}  edited successfully ", "Success"
+                , MessageBoxButtons.OK, MessageBoxIcon.Information);
+                dgv_medicine.DataSource = null;
+                dgv_medicine.DataSource = manager.GetAllActiveMedicines();
+                if (dgv_medicine.Columns.Count > 0)
+                {
+                    dgv_medicine.Columns["Id"].DisplayIndex = 0;
+                }
+                txt_businessname.Clear();
+                txt_buyingPrice.Clear();
+                txt_salePrice.Clear();
+                txt_scientificename.Clear();
+                txt_quantity.Clear();
+                cmb_company.Items.Clear();
+                txt_businessname.Focus();
+                cmb_company.SelectedIndex = -1;
+            }
+            else
+            {
+                MessageBox.Show("Error occurred , medicine could not be edited", "Error"
+                    , MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+
+
+        }
+        /// //////////////////////////////////////////////////////////////////////////////
+     
+        private void btn_showMedicine_Click(object sender, EventArgs e)
+        {
+            MedicinesManager manager = new MedicinesManager();
+            dgv_medicine.DataSource = null;
+            dgv_medicine.DataSource=manager.GetAllActiveMedicines();
+            if (dgv_medicine.Columns.Count > 0)
+            {
+                dgv_medicine.Columns["Id"].DisplayIndex = 0;
+            }
+            txt_businessname.Clear();
+            txt_buyingPrice.Clear();
+            txt_salePrice.Clear();
+            txt_scientificename.Clear();
+            txt_quantity.Clear();
+            cmb_company.Items.Clear();
+            txt_businessname.Focus();
+            cmb_company.SelectedIndex = -1;
+
+        }
     }
+
+
+
+
+
+
+
+
+
 }

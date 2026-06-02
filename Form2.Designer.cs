@@ -443,6 +443,7 @@
             btn_showMedicine.Size = new Size(225, 56);
             btn_showMedicine.TabIndex = 7;
             btn_showMedicine.Text = "Show";
+            btn_showMedicine.Click += btn_showMedicine_Click;
             // 
             // btn_deleteMedicine
             // 
@@ -464,6 +465,7 @@
             btn_deleteMedicine.Size = new Size(225, 56);
             btn_deleteMedicine.TabIndex = 6;
             btn_deleteMedicine.Text = "Delete";
+            btn_deleteMedicine.Click += btn_deleteMedicine_Click;
             // 
             // btn_editMedicine
             // 
@@ -485,6 +487,7 @@
             btn_editMedicine.Size = new Size(225, 56);
             btn_editMedicine.TabIndex = 5;
             btn_editMedicine.Text = "Edit";
+            btn_editMedicine.Click += btn_editMedicine_Click;
             // 
             // btn_addMedicine
             // 
@@ -630,6 +633,7 @@
             dgv_medicine.ThemeStyle.RowsStyle.Height = 29;
             dgv_medicine.ThemeStyle.RowsStyle.SelectionBackColor = Color.FromArgb(239, 241, 243);
             dgv_medicine.ThemeStyle.RowsStyle.SelectionForeColor = Color.Black;
+            dgv_medicine.CellClick += dgv_medicine_CellClick;
             // 
             // tabPage2
             // 

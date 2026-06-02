@@ -9,7 +9,7 @@ namespace pharmacy_management_1.Managers
 {
     internal class MedicinesManager
     {
-        public List<Medicines> GetAllActiveMedicinies()
+        public List<Medicines> GetAllActiveMedicines()
         {
            return DataStore.ActiveMedicinesList;
         }
@@ -37,7 +37,7 @@ namespace pharmacy_management_1.Managers
             DataStore.ActiveMedicinesList.Add(newMedicine);
             return true;
         }
-        public void EditMedicines(Medicines EditMedicine)
+        public bool EditMedicines(Medicines EditMedicine)
         {
             for (int i = 0; i < DataStore.ActiveMedicinesList.Count; i++)
             {
@@ -50,9 +50,10 @@ namespace pharmacy_management_1.Managers
                     DataStore.ExpiredMedicinesList[i].Company = EditMedicine.Company;
                     DataStore.ActiveMedicinesList[i].Quantity = EditMedicine.Quantity;
                     DataStore.ActiveMedicinesList[i].ExpiryDate = EditMedicine.ExpiryDate;
-                    break;
+                   return true;
                 }
             }
+            return false;
         }
        
         public void DeleteActiveMedicine(int id)
