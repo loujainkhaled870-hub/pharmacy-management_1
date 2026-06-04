@@ -37,7 +37,7 @@ namespace pharmacy_management_1.Managers
             DataStore.ActiveMedicinesList.Add(newMedicine);
             return true;
         }
-        public bool EditMedicines(Medicines EditMedicine)
+        public void EditMedicines(Medicines EditMedicine)
         {
             for (int i = 0; i < DataStore.ActiveMedicinesList.Count; i++)
             {
@@ -45,15 +45,13 @@ namespace pharmacy_management_1.Managers
                 {
                     DataStore.ActiveMedicinesList[i].BusinessName = EditMedicine.BusinessName;
                     DataStore.ActiveMedicinesList[i].ScientificName = EditMedicine.ScientificName;
-                    DataStore.ActiveMedicinesList[i].BuyingPrice = EditMedicine.BuyingPrice;
-                    DataStore.ActiveMedicinesList[i].SalePrice = EditMedicine.SalePrice;
-                    DataStore.ExpiredMedicinesList[i].Company = EditMedicine.Company;
+                    DataStore.ActiveMedicinesList[i].Price = EditMedicine.Price;
+                    DataStore.ActiveMedicinesList[i].Company = EditMedicine.Company;
                     DataStore.ActiveMedicinesList[i].Quantity = EditMedicine.Quantity;
                     DataStore.ActiveMedicinesList[i].ExpiryDate = EditMedicine.ExpiryDate;
-                   return true;
+                    break;
                 }
             }
-            return false;
         }
        
         public void DeleteActiveMedicine(int id)
@@ -73,17 +71,30 @@ namespace pharmacy_management_1.Managers
         {
             return DataStore.ExpiredMedicinesList;
         }
-        public void DestoryExpiredMedicine(int id)
+
+        public void CheckAndMoveExpiredMedicines()
         {
 
-            for (int i = 0; i <DataStore.ExpiredMedicinesList.Count; i++)
+            for (int i = DataStore.ActiveMedicinesList.Count; i >0; i--)
             {
-                if (DataStore.ExpiredMedicinesList[i].Id == id)
+                if (DataStore.ActiveMedicinesList[i] != null)
                 {
-                    DataStore.ExpiredMedicinesList.Remove(DataStore.ExpiredMedicinesList[i]);
-                    break;
+                    if (DataStore.ActiveMedicinesList[i].ExpiryDate.Date < DateTime.Now.Date)
+                    {
+                        DataStore.ExpiredMedicinesList.Add(DataStore.ActiveMedicinesList[i]);
+                        DataStore.ActiveMedicinesList.Remove(DataStore.ActiveMedicinesList[i]);
+                    }
                 }
             }
+        }
+        public List<Medicines> GetAllExpiredMedicines()
+        {
+            return DataStore.ExpiredMedicinesList;
+        }
+        public void ClearAllExpiredMedicines()
+        {
+                    DataStore.ExpiredMedicinesList.Clear();
+                   
         }
 
     }

@@ -23,6 +23,14 @@ namespace pharmacy_management_1.Managers
             CompaniesList.Add(new Company(1,"Thameco","011_444567"));
             CompaniesList.Add(new Company(2, "Diamond pharma", "031_222987"));
             CompaniesList.Add(new Company(3, "Alpha pharma", "021_333456"));
+            ActiveMedicinesList.Add(new Medicines(1,"Thamecopramol" , "paracetamol" ,150, CompaniesList[0] , 1800 , new DateTime(2028,5,1)));
+            ActiveMedicinesList.Add(new Medicines(2, "Thamecocillin", "Amoxicillin", 80, CompaniesList[0], 4800, new DateTime(2027, 5, 8)));
+            ActiveMedicinesList.Add(new Medicines(3, "Profinal", "ibuprofen", 150, CompaniesList[1], 4000, new DateTime(2028, 3, 10)));
+            ActiveMedicinesList.Add(new Medicines(4, "Diafloxin", "Ciprofloxacin", 60, CompaniesList[1], 5000, new DateTime(2027, 9, 20)));
+            ActiveMedicinesList.Add(new Medicines(5, "Alphamox","Amoxicillin", 100, CompaniesList[2], 4500, new DateTime(2028, 1, 10)));
+            ActiveMedicinesList.Add(new Medicines(6, "Alphanax", "Alprazolam", 50, CompaniesList[2], 3500, new DateTime(2028, 5, 1)));
+            ActiveMedicinesList.Add(new Medicines(8, "Augmentin", "Amoxicillin", 25, CompaniesList[1], 9500, new DateTime(2025, 4, 1)));
+            ActiveMedicinesList.Add(new Medicines(9, "Catafast", "Diclofenac Potassium", 110, CompaniesList[2], 3000, new DateTime(2025, 12, 5)));
         }
         //
     }

@@ -14,21 +14,19 @@ namespace pharmacy_management_1.Models
         public int Quantity { get; set; }
 
         public Company Company { get; set; }
-        public decimal BuyingPrice { get; set; }
-        public decimal SalePrice { get; set; }
+        public decimal Price { get; set; }
         public DateTime ExpiryDate { get; set; }
 
         public Medicines(int id, string businessName,
-            string scientificName, int quantity, Company company, decimal buyingPrice,
-            decimal salePrice , DateTime expirydate) : base(id)
+            string scientificName, int quantity, Company company,
+            decimal Price, DateTime expirydate) : base(id)
         {
-            BusinessName = businessName;
-            ScientificName = scientificName;
-            Quantity = quantity;
-            Company = company;
-            BuyingPrice = buyingPrice;
-            SalePrice = salePrice;
-            ExpiryDate = expirydate;
+            this.BusinessName = businessName;
+            this.ScientificName = scientificName;
+            this.Quantity = quantity;
+            this.Company = company;
+            this.Price = Price;
+            this.ExpiryDate = expirydate;
         }
 
     }
