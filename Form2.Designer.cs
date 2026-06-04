@@ -211,7 +211,7 @@
             guna2Panel1.Location = new Point(0, 0);
             guna2Panel1.Name = "guna2Panel1";
             guna2Panel1.ShadowDecoration.CustomizableEdges = customizableEdges72;
-            guna2Panel1.Size = new Size(1191, 50);
+            guna2Panel1.Size = new Size(1280, 50);
             guna2Panel1.TabIndex = 0;
             // 
             // guna2ControlBox3
@@ -224,7 +224,7 @@
             guna2ControlBox3.FillColor = Color.FromArgb(64, 138, 113);
             guna2ControlBox3.HoverState.FillColor = Color.Gray;
             guna2ControlBox3.IconColor = Color.White;
-            guna2ControlBox3.Location = new Point(999, 7);
+            guna2ControlBox3.Location = new Point(1088, 7);
             guna2ControlBox3.Name = "guna2ControlBox3";
             guna2ControlBox3.ShadowDecoration.CustomizableEdges = customizableEdges66;
             guna2ControlBox3.Size = new Size(56, 36);
@@ -239,7 +239,7 @@
             guna2ControlBox1.FillColor = Color.FromArgb(64, 138, 113);
             guna2ControlBox1.HoverState.FillColor = Color.Red;
             guna2ControlBox1.IconColor = Color.White;
-            guna2ControlBox1.Location = new Point(1123, 7);
+            guna2ControlBox1.Location = new Point(1212, 7);
             guna2ControlBox1.Name = "guna2ControlBox1";
             guna2ControlBox1.ShadowDecoration.CustomizableEdges = customizableEdges68;
             guna2ControlBox1.Size = new Size(56, 36);
@@ -255,7 +255,7 @@
             guna2ControlBox2.FillColor = Color.FromArgb(64, 138, 113);
             guna2ControlBox2.HoverState.FillColor = Color.Gray;
             guna2ControlBox2.IconColor = Color.White;
-            guna2ControlBox2.Location = new Point(1061, 7);
+            guna2ControlBox2.Location = new Point(1150, 7);
             guna2ControlBox2.Name = "guna2ControlBox2";
             guna2ControlBox2.ShadowDecoration.CustomizableEdges = customizableEdges70;
             guna2ControlBox2.Size = new Size(56, 36);
@@ -268,7 +268,7 @@
             panMain.Location = new Point(106, 49);
             panMain.Name = "panMain";
             panMain.ShadowDecoration.CustomizableEdges = customizableEdges56;
-            panMain.Size = new Size(1085, 641);
+            panMain.Size = new Size(1171, 675);
             panMain.TabIndex = 1;
             // 
             // guna2TabControl1
@@ -285,7 +285,7 @@
             guna2TabControl1.Location = new Point(0, 0);
             guna2TabControl1.Name = "guna2TabControl1";
             guna2TabControl1.SelectedIndex = 0;
-            guna2TabControl1.Size = new Size(1085, 641);
+            guna2TabControl1.Size = new Size(1171, 675);
             guna2TabControl1.TabButtonHoverState.BorderColor = Color.Empty;
             guna2TabControl1.TabButtonHoverState.FillColor = Color.FromArgb(40, 52, 70);
             guna2TabControl1.TabButtonHoverState.Font = new Font("Segoe UI Semibold", 10F);
@@ -324,7 +324,7 @@
             tabPage1.Location = new Point(5, 4);
             tabPage1.Name = "tabPage1";
             tabPage1.Padding = new Padding(3);
-            tabPage1.Size = new Size(1076, 633);
+            tabPage1.Size = new Size(1162, 667);
             tabPage1.TabIndex = 0;
             tabPage1.Text = "tabPage1";
             tabPage1.Click += tabPage1_Click;
@@ -339,7 +339,7 @@
             date_expiry.Font = new Font("Segoe UI", 9F);
             date_expiry.ForeColor = Color.White;
             date_expiry.Format = DateTimePickerFormat.Long;
-            date_expiry.Location = new Point(806, 214);
+            date_expiry.Location = new Point(906, 214);
             date_expiry.MaxDate = new DateTime(9998, 12, 31, 0, 0, 0, 0);
             date_expiry.MinDate = new DateTime(1753, 1, 1, 0, 0, 0, 0);
             date_expiry.Name = "date_expiry";
@@ -363,7 +363,7 @@
             txt_scientificename.Font = new Font("Segoe UI", 9F);
             txt_scientificename.ForeColor = Color.Black;
             txt_scientificename.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            txt_scientificename.Location = new Point(806, 76);
+            txt_scientificename.Location = new Point(906, 76);
             txt_scientificename.Margin = new Padding(3, 4, 3, 4);
             txt_scientificename.Name = "txt_scientificename";
             txt_scientificename.PlaceholderForeColor = Color.Gray;
@@ -388,7 +388,7 @@
             txt_quantity.Font = new Font("Segoe UI", 9F);
             txt_quantity.ForeColor = Color.Black;
             txt_quantity.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            txt_quantity.Location = new Point(550, 214);
+            txt_quantity.Location = new Point(627, 214);
             txt_quantity.Margin = new Padding(3, 4, 3, 4);
             txt_quantity.Name = "txt_quantity";
             txt_quantity.PlaceholderForeColor = Color.Gray;
@@ -413,7 +413,7 @@
             txt_salePrice.Font = new Font("Segoe UI", 9F);
             txt_salePrice.ForeColor = Color.Black;
             txt_salePrice.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            txt_salePrice.Location = new Point(806, 144);
+            txt_salePrice.Location = new Point(907, 144);
             txt_salePrice.Margin = new Padding(3, 4, 3, 4);
             txt_salePrice.Name = "txt_salePrice";
             txt_salePrice.PlaceholderForeColor = Color.Gray;
@@ -437,7 +437,7 @@
             btn_showMedicine.Image = Properties.Resources.visibility;
             btn_showMedicine.ImageAlign = HorizontalAlignment.Left;
             btn_showMedicine.ImageSize = new Size(30, 30);
-            btn_showMedicine.Location = new Point(831, 386);
+            btn_showMedicine.Location = new Point(920, 386);
             btn_showMedicine.Name = "btn_showMedicine";
             btn_showMedicine.ShadowDecoration.CustomizableEdges = customizableEdges10;
             btn_showMedicine.Size = new Size(225, 56);
@@ -459,7 +459,7 @@
             btn_deleteMedicine.Image = Properties.Resources.trash;
             btn_deleteMedicine.ImageAlign = HorizontalAlignment.Left;
             btn_deleteMedicine.ImageSize = new Size(30, 30);
-            btn_deleteMedicine.Location = new Point(550, 386);
+            btn_deleteMedicine.Location = new Point(638, 386);
             btn_deleteMedicine.Name = "btn_deleteMedicine";
             btn_deleteMedicine.ShadowDecoration.CustomizableEdges = customizableEdges12;
             btn_deleteMedicine.Size = new Size(225, 56);
@@ -481,7 +481,7 @@
             btn_editMedicine.Image = Properties.Resources._10426353;
             btn_editMedicine.ImageAlign = HorizontalAlignment.Left;
             btn_editMedicine.ImageSize = new Size(30, 30);
-            btn_editMedicine.Location = new Point(831, 302);
+            btn_editMedicine.Location = new Point(920, 302);
             btn_editMedicine.Name = "btn_editMedicine";
             btn_editMedicine.ShadowDecoration.CustomizableEdges = customizableEdges14;
             btn_editMedicine.Size = new Size(225, 56);
@@ -503,7 +503,7 @@
             btn_addMedicine.Image = Properties.Resources._14734606;
             btn_addMedicine.ImageAlign = HorizontalAlignment.Left;
             btn_addMedicine.ImageSize = new Size(30, 30);
-            btn_addMedicine.Location = new Point(550, 302);
+            btn_addMedicine.Location = new Point(638, 302);
             btn_addMedicine.Name = "btn_addMedicine";
             btn_addMedicine.ShadowDecoration.CustomizableEdges = customizableEdges16;
             btn_addMedicine.Size = new Size(225, 56);
@@ -526,7 +526,7 @@
             cmb_company.ForeColor = Color.Black;
             cmb_company.IntegralHeight = false;
             cmb_company.ItemHeight = 40;
-            cmb_company.Location = new Point(669, 23);
+            cmb_company.Location = new Point(758, 23);
             cmb_company.Name = "cmb_company";
             cmb_company.ShadowDecoration.CustomizableEdges = customizableEdges18;
             cmb_company.Size = new Size(240, 46);
@@ -547,7 +547,7 @@
             txt_buyingPrice.Font = new Font("Segoe UI", 9F);
             txt_buyingPrice.ForeColor = Color.Black;
             txt_buyingPrice.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            txt_buyingPrice.Location = new Point(550, 144);
+            txt_buyingPrice.Location = new Point(627, 144);
             txt_buyingPrice.Margin = new Padding(3, 4, 3, 4);
             txt_buyingPrice.Name = "txt_buyingPrice";
             txt_buyingPrice.PlaceholderForeColor = Color.Gray;
@@ -572,7 +572,7 @@
             txt_businessname.Font = new Font("Segoe UI", 9F);
             txt_businessname.ForeColor = Color.Black;
             txt_businessname.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            txt_businessname.Location = new Point(550, 76);
+            txt_businessname.Location = new Point(627, 76);
             txt_businessname.Margin = new Padding(3, 4, 3, 4);
             txt_businessname.Name = "txt_businessname";
             txt_businessname.PlaceholderForeColor = Color.Gray;
@@ -609,7 +609,7 @@
             dgv_medicine.Name = "dgv_medicine";
             dgv_medicine.RowHeadersVisible = false;
             dgv_medicine.RowHeadersWidth = 35;
-            dgv_medicine.Size = new Size(538, 621);
+            dgv_medicine.Size = new Size(615, 621);
             dgv_medicine.TabIndex = 0;
             dgv_medicine.Theme = Guna.UI2.WinForms.Enums.DataGridViewPresetThemes.Light;
             dgv_medicine.ThemeStyle.AlternatingRowsStyle.BackColor = Color.FromArgb(247, 248, 249);
@@ -1368,7 +1368,7 @@
             panSideNavbar.Location = new Point(0, 49);
             panSideNavbar.Name = "panSideNavbar";
             panSideNavbar.ShadowDecoration.CustomizableEdges = customizableEdges64;
-            panSideNavbar.Size = new Size(105, 641);
+            panSideNavbar.Size = new Size(105, 675);
             panSideNavbar.TabIndex = 0;
             // 
             // btn_users
@@ -1513,7 +1513,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1191, 689);
+            ClientSize = new Size(1280, 723);
             Controls.Add(panMain);
             Controls.Add(panSideNavbar);
             Controls.Add(guna2Panel1);
