@@ -1044,7 +1044,8 @@ namespace pharmacy_management_1
 
         private void dgv_invoices_SelectionChanged(object sender, EventArgs e)
         {
-            if(dgv_invoices.CurrentRow==null || dgv_invoices.CurrentRow.Index == -1)
+            if(dgv_invoices.CurrentRow==null || dgv_invoices.CurrentRow.Index <0 
+                || DataStore.InvoicesList.Count==0)
             {
                 dgv_invoiceDetails.DataSource = null;
                 return;
