@@ -12,6 +12,7 @@ namespace pharmacy_management_1.Managers
         //public static List<Medicines>MedicinesList = new List<Medicines>();
         public static List<Company> CompaniesList = new List<Company>();
         public static List<Invoice> InvoicesList = new List<Invoice>();
+        public static List<InvoiceItem> cartList = new List<InvoiceItem>();
         public static List<Medicines> ActiveMedicinesList = new List<Medicines>();
         public static List<Medicines> ExpiredMedicinesList = new List<Medicines>();
         public static List<Users> UsersList = new List<Users>();

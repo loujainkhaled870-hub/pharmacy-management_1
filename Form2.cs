@@ -478,6 +478,8 @@ namespace pharmacy_management_1
 
             RefreshPosMedicinesComboBoxes();
             txt_PosTotal.Text = "0";
+
+            UpdateInvoicesGrid();
         }
 
 
@@ -933,8 +935,8 @@ namespace pharmacy_management_1
                 InvoiceItem newItem = new InvoiceItem
                 {
                     Medicine = selectedMedicine,
-                    Price = selectedMedicine.Price,
-                    Quantity = selectedMedicine.Quantity,
+                    Price = (decimal)selectedMedicine.Price,
+                    Quantity = requirQty,
                     TotalPrice = (decimal)requirQty * (decimal)selectedMedicine.Price
                 };
                 DataStore.cartList.Add(newItem);
@@ -945,7 +947,129 @@ namespace pharmacy_management_1
         }
         private void UpdateCartGrid()
         {
+            dgv_PosCart.DataSource = null;
+            dgv_PosCart.DataSource = DataStore.cartList;
+            if (dgv_PosCart.Columns.Count > 0)
+            {
+                if (dgv_PosCart.Columns["MedicineName"] != null)
+                {
+                    dgv_PosCart.Columns["MedicineName"].HeaderText = "Medicine Name";
+                }
+                dgv_PosCart.Columns["Quantity"].HeaderText = "Quantity";
+                dgv_PosCart.Columns["Price"].HeaderText = "Price";
+                dgv_PosCart.Columns["TotalPrice"].HeaderText = "Total Price";
+                if (dgv_PosCart.Columns["Medicine"] != null)
+                {
+                    dgv_PosCart.Columns["Medicine"].Visible = false;
+                }
+            }
+            decimal grandTotal = 0;
 
+            for (int i = 0; i < DataStore.cartList.Count; i++)
+            {
+                grandTotal = grandTotal + DataStore.cartList[i].TotalPrice;
+            }
+            txt_PosTotal.Text = grandTotal.ToString();
+        }
+
+        private void btn_PosRemove_Click(object sender, EventArgs e)
+        {
+            if (dgv_PosCart.CurrentRow == null || dgv_PosCart.CurrentRow.Index == -1)
+            {
+                MessageBox.Show("please select an item from the cart to remove", "Warning"
+                    , MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            int selectedIndex = dgv_PosCart.CurrentRow.Index;
+            DataStore.cartList.RemoveAt(selectedIndex);
+            UpdateCartGrid();
+        }
+
+        private void btn_PosSave_Click(object sender, EventArgs e)
+        {
+            if (DataStore.cartList.Count == 0)
+            {
+                MessageBox.Show("the cart is empty ! cannot save an empty invoice", "Warning"
+                    , MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            decimal finalTotal = 0;
+
+            for (int i = 0; i < DataStore.cartList.Count; i++)
+            {
+                finalTotal += DataStore.cartList[i].TotalPrice;
+            }
+            Invoice newInvoice = new Invoice
+            {
+                Id = DataStore.InvoicesList.Count + 1,
+                Date = DateTime.Now,
+                TotalAmount = finalTotal,
+                Items = new List<InvoiceItem>(DataStore.cartList)
+            };
+            DataStore.InvoicesList.Add(newInvoice);
+
+            for (int i = 0; i < DataStore.cartList.Count; i++)
+            {
+                InvoiceItem item = DataStore.cartList[i];
+                item.Medicine.Quantity = item.Medicine.Quantity - item.Quantity;
+                MessageBox.Show("Invoice saved successfully ant stock has been update", "Success"
+                    , MessageBoxButtons.OK, MessageBoxIcon.Information);
+                DataStore.cartList.Clear();
+                UpdateCartGrid();
+            }
+            UpdateInvoicesGrid();
+        }
+        private void UpdateInvoicesGrid()
+        {
+            dgv_invoices.DataSource = null;
+            dgv_invoices.DataSource = DataStore.InvoicesList;
+            if (dgv_invoices.Columns.Count > 0)
+            {
+                dgv_invoices.Columns["Id"].HeaderText = "Id";
+                dgv_invoices.Columns["Date"].HeaderText = "Date";
+                dgv_invoices.Columns["TotalAmount"].HeaderText = "Total";
+                if (dgv_invoices.Columns["Items"] != null)
+                {
+                    dgv_invoices.Columns["Items"].Visible = false;
+                }
+            }
+            decimal totalSales = 0;
+
+            for (int i = 0; i < DataStore.InvoicesList.Count; i++)
+            {
+                totalSales = totalSales + DataStore.InvoicesList[i].TotalAmount;
+            }
+            txt_totalSales.Text = totalSales.ToString();
+        }
+
+        private void dgv_invoices_SelectionChanged(object sender, EventArgs e)
+        {
+            if(dgv_invoices.CurrentRow==null || dgv_invoices.CurrentRow.Index == -1)
+            {
+                dgv_invoiceDetails.DataSource = null;
+                return;
+            }
+            int selectedIndex = dgv_invoices.CurrentRow.Index ;
+            Invoice selectedInvoice = DataStore.InvoicesList[selectedIndex];
+
+            dgv_invoiceDetails.DataSource = null;
+            dgv_invoiceDetails.DataSource = selectedInvoice.Items;
+
+            if (dgv_invoiceDetails.Columns.Count > 0)
+            {
+                if (dgv_invoiceDetails.Columns["MedicineName"]!= null)
+                {
+                    dgv_invoiceDetails.Columns["MedicineName"].HeaderText = "MedicineName";
+                }
+                dgv_invoiceDetails.Columns["Quantity"].HeaderText = "Quantity";
+                dgv_invoiceDetails.Columns["Price"].HeaderText = "Price";
+                dgv_invoiceDetails.Columns["TotalPrice"].HeaderText = "Total Price";
+                if (dgv_invoiceDetails.Columns["Medicine"]!= null)
+                {
+                    dgv_invoiceDetails.Columns["Medicine"].Visible = false;
+                }
+
+            }
         }
     }
 
