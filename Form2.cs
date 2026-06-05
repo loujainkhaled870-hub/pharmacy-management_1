@@ -293,6 +293,8 @@ namespace pharmacy_management_1
             txt_companyName.Clear();
             txt_companyPhone.Clear();
             txt_companyName.Focus();
+
+            RefreshCompaniesComboBoxes();
         }
 
         //////////////////////////////////////////////////////////////////
@@ -444,13 +446,14 @@ namespace pharmacy_management_1
         private void Form2_Load(object sender, EventArgs e)
         {
             btn_Medicines.Checked = true;
+            RefreshCompaniesComboBoxes();
 
-            CompanyManager companyManager = new CompanyManager();
-            List<Company> list = companyManager.GetAllCompanies();
-            cmb_company.DataSource = null;
-            cmb_company.DataSource = list;
-            cmb_company.DisplayMember = "Name";
-            cmb_company.SelectedIndex = -1;
+            //CompanyManager companyManager = new CompanyManager();
+            //List<Company> list = companyManager.GetAllCompanies();
+            //cmb_company.DataSource = null;
+            //cmb_company.DataSource = list;
+            //cmb_company.DisplayMember = "Name";
+            //cmb_company.SelectedIndex = -1;
 
             MedicinesManager manager = new MedicinesManager();
             manager.CheckAndMoveExpiredMedicines();
@@ -466,12 +469,15 @@ namespace pharmacy_management_1
             {
                 dgv_expiredMedicines.Columns["Id"].DisplayIndex = 0;
             }
-            CompanyManager compManager = new CompanyManager();
-            List<Company> filterList = new List<Company>(compManager.GetAllCompanies());
-            cmb_CompanyFilter.DataSource = null;
-            cmb_CompanyFilter.DataSource = filterList;
-            cmb_CompanyFilter.DisplayMember = "Name";
-            cmb_CompanyFilter.SelectedIndex = -1;
+            //CompanyManager compManager = new CompanyManager();
+            //List<Company> filterList = new List<Company>(compManager.GetAllCompanies());
+            //cmb_CompanyFilter.DataSource = null;
+            //cmb_CompanyFilter.DataSource = filterList;
+            //cmb_CompanyFilter.DisplayMember = "Name";
+            //cmb_CompanyFilter.SelectedIndex = -1;
+
+            RefreshPosMedicinesComboBoxes();
+            txt_PosTotal.Text = "0";
         }
 
 
@@ -555,6 +561,8 @@ namespace pharmacy_management_1
             txt_quantity.Clear();
             cmb_company.SelectedIndex = -1;
             txt_businessname.Focus();
+
+            RefreshPosMedicinesComboBoxes();
         }
         //////////////////////////////////////////////////////////////
 
@@ -836,6 +844,109 @@ namespace pharmacy_management_1
                 dgv_medicine.Columns["Id"].Width = 40;
             }
         }
+
+        private void RefreshCompaniesComboBoxes()
+        {
+            CompanyManager compManager = new CompanyManager();
+
+            List<Company> addList = new List<Company>(compManager.GetAllCompanies());
+            cmb_company.DataSource = null;
+            cmb_company.DataSource = addList;
+            cmb_company.DisplayMember = "Name";
+            cmb_company.SelectedIndex = -1;
+
+            List<Company> filterList = new List<Company>(compManager.GetAllCompanies());
+            cmb_CompanyFilter.DataSource = null;
+            cmb_CompanyFilter.DataSource = filterList;
+            cmb_CompanyFilter.DisplayMember = "Name";
+            cmb_CompanyFilter.SelectedIndex = -1;
+        }
+
+        public void RefreshPosMedicinesComboBoxes()
+        {
+            MedicinesManager medManager = new MedicinesManager();
+            List<Medicines> activeMedicines = new List<Medicines>(medManager.GetAllActiveMedicines());
+            cmb_PosMedicine.DataSource = null;
+            cmb_PosMedicine.DataSource = activeMedicines;
+            cmb_PosMedicine.DisplayMember = "BusinessName";
+            cmb_PosMedicine.SelectedIndex = -1;
+        }
+
+        private void cmb_PosMedicine_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cmb_PosMedicine.SelectedIndex != -1 && cmb_PosMedicine.SelectedIndex != null)
+            {
+                Medicines selectedMedicine = (Medicines)cmb_PosMedicine.SelectedItem;
+                txt_PosPrice.Text = selectedMedicine.Price.ToString();
+            }
+            else
+            {
+                txt_PosPrice.Text = "";
+            }
+        }
+
+        private void btn_PosAdd_Click(object sender, EventArgs e)
+        {
+            if (cmb_PosMedicine.SelectedIndex == -1 || cmb_PosMedicine.SelectedIndex == null)
+            {
+                MessageBox.Show("please select a medicine first", "Warning"
+                    , MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            Medicines selectedMedicine = (Medicines)cmb_PosMedicine.SelectedItem;
+            int requirQty;
+            if (!int.TryParse(txt_PosQuantity.Text, out requirQty) || requirQty <= 0)
+            {
+                MessageBox.Show("please enter a valid quantity greater than zero", "Invalid Quantity"
+                    , MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            if (requirQty > selectedMedicine.Quantity)
+            {
+                MessageBox.Show($"the requested quantity is not available ! max available quantity is : {selectedMedicine.Quantity}", "Stock Alert"
+                    , MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            InvoiceItem existingItem = null;
+
+            for (int i = 0; i < DataStore.cartList.Count; i++)
+            {
+                if (DataStore.cartList[i].Medicine.Id == selectedMedicine.Id)
+                {
+                    existingItem = DataStore.cartList[i];
+                    break;
+                }
+            }
+            if (existingItem != null)
+            {
+                if (existingItem.Quantity + requirQty > selectedMedicine.Quantity)
+                {
+                    MessageBox.Show($"total selected quantity for this item exceeds the available stock ! max available quantity is : {selectedMedicine.Quantity}", "Stock Alert"
+                   , MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                existingItem.Quantity += requirQty;
+                existingItem.TotalPrice = (decimal)existingItem.Quantity * existingItem.Price;
+            }
+            else
+            {
+                InvoiceItem newItem = new InvoiceItem
+                {
+                    Medicine = selectedMedicine,
+                    Price = selectedMedicine.Price,
+                    Quantity = selectedMedicine.Quantity,
+                    TotalPrice = (decimal)requirQty * (decimal)selectedMedicine.Price
+                };
+                DataStore.cartList.Add(newItem);
+                UpdateCartGrid();
+                txt_PosQuantity.Text = "";
+                txt_PosQuantity.Focus();
+            }
+        }
+        private void UpdateCartGrid()
+        {
+
+        }
     }
-    
+
 }
