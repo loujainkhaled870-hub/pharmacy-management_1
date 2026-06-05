@@ -75,7 +75,7 @@ namespace pharmacy_management_1.Managers
         public void CheckAndMoveExpiredMedicines()
         {
 
-            for (int i = DataStore.ActiveMedicinesList.Count; i >0; i--)
+            for (int i = DataStore.ActiveMedicinesList.Count-1; i >= 0; i--)
             {
                 if (DataStore.ActiveMedicinesList[i] != null)
                 {
@@ -95,6 +95,44 @@ namespace pharmacy_management_1.Managers
         {
                     DataStore.ExpiredMedicinesList.Clear();
                    
+        }
+        public List<Medicines> FilterActiveMedicines(string companyName, decimal maxPrice, bool usePrice, DateTime expiryDate, bool useExpiry)
+        {
+            List<Medicines> filteredList = new List<Medicines>();
+
+            for (int i = 0; i < DataStore.ActiveMedicinesList.Count; i++)
+            {
+                Medicines med = DataStore.ActiveMedicinesList[i];
+
+                if (med != null)
+                {
+                    bool matchesCompany = true;
+                    bool matchesPrice = true;
+                    bool matchesExpiry = true;
+
+                    if (companyName != null && (med.Company == null || med.Company.Name != companyName))
+                    {
+                        matchesCompany = false;
+                    }
+
+                    if (usePrice && med.Price > maxPrice)
+                    {
+                        matchesPrice = false;
+                    }
+
+                    if (useExpiry && med.ExpiryDate.Date != expiryDate.Date)
+                    {
+                        matchesExpiry = false;
+                    }
+
+                    if (matchesCompany && matchesPrice && matchesExpiry)
+                    {
+                        filteredList.Add(med);
+                    }
+                }
+            }
+
+            return filteredList;
         }
 
     }

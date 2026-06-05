@@ -29,8 +29,8 @@ namespace pharmacy_management_1.Managers
             ActiveMedicinesList.Add(new Medicines(4, "Diafloxin", "Ciprofloxacin", 60, CompaniesList[1], 5000, new DateTime(2027, 9, 20)));
             ActiveMedicinesList.Add(new Medicines(5, "Alphamox","Amoxicillin", 100, CompaniesList[2], 4500, new DateTime(2028, 1, 10)));
             ActiveMedicinesList.Add(new Medicines(6, "Alphanax", "Alprazolam", 50, CompaniesList[2], 3500, new DateTime(2028, 5, 1)));
-            ActiveMedicinesList.Add(new Medicines(8, "Augmentin", "Amoxicillin", 25, CompaniesList[1], 9500, new DateTime(2025, 4, 1)));
-            ActiveMedicinesList.Add(new Medicines(9, "Catafast", "Diclofenac Potassium", 110, CompaniesList[2], 3000, new DateTime(2025, 12, 5)));
+            ActiveMedicinesList.Add(new Medicines(7, "Augmentin", "Amoxicillin", 25, CompaniesList[1], 9500, new DateTime(2025, 4, 1)));
+            ActiveMedicinesList.Add(new Medicines(8, "Catafast", "Diclofenac Potassium", 110, CompaniesList[2], 3000, new DateTime(2025, 12, 5)));
         }
         //
     }

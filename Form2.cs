@@ -460,8 +460,15 @@ namespace pharmacy_management_1
             {
                 dgv_medicine.Columns["Id"].DisplayIndex = 0;
             }
+            dgv_expiredMedicines.DataSource = null;
+            dgv_expiredMedicines.DataSource = manager.GetAllExpiredMedicines();
+            if (dgv_expiredMedicines.Columns.Count > 0)
+            {
+                dgv_expiredMedicines.Columns["Id"].DisplayIndex = 0;
+            }
             CompanyManager compManager = new CompanyManager();
-            cmb_company.DataSource = compManager.GetAllCompanies();
+            List<Company> filterList = new List<Company>(compManager.GetAllCompanies());
+            cmb_CompanyFilter.DataSource = null;
         }
 
 
@@ -716,6 +723,8 @@ namespace pharmacy_management_1
         {
 
 
+        private void btn_destroy_Click_1(object sender, EventArgs e)
+        {
             MedicinesManager manager = new MedicinesManager();
 
             if (manager.GetAllExpiredMedicines().Count == 0)
@@ -724,13 +733,15 @@ namespace pharmacy_management_1
                 return;
             }
 
-            DialogResult result = MessageBox.Show("Are you sure you want to destroy ALL expired medicines permanently?\nThis action cannot be undone!", "Confirm Bulk Destruction", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            DialogResult result = MessageBox.Show("Are you sure you want to destroy ALL expired medicines permanently?\nThis action cannot be undone!", "Confirm Bulk Destruction"
+                , MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
             if (result == DialogResult.Yes)
             {
                 manager.ClearAllExpiredMedicines();
 
-                MessageBox.Show("All expired medicines have been successfully destroyed and removed from the system.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("All expired medicines have been successfully destroyed and removed from the system.", "Success"
+                    , MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 dgv_expiredMedicines.DataSource = null;
                 dgv_expiredMedicines.DataSource = manager.GetAllExpiredMedicines();
@@ -741,6 +752,86 @@ namespace pharmacy_management_1
                 }
             }
         }
-    
+
+        private void chk_DateFilter_CheckedChanged(object sender, EventArgs e)
+        {
+            date_Filter.Enabled = chk_DateFilter.Checked;
+            ApplyMedicinesFilter();
+        }
+
+
+        private void ApplyMedicinesFilter()
+        {
+            string? selectedCompany = null;
+            if (cmb_CompanyFilter.SelectedIndex != -1)
+            {
+                selectedCompany = cmb_CompanyFilter.Text;
+            }
+            else
+            {
+                selectedCompany = null;
+            }
+
+            decimal maxPrice = 0;
+            bool usePrice = false;
+            if (txt_PriceFilter.Text != null && txt_PriceFilter.Text != "")
+            {
+                if (decimal.TryParse(txt_PriceFilter.Text, out maxPrice))
+                {
+                    usePrice = true;
+                }
+            }
+
+            DateTime expiryDate = date_Filter.Value;
+            bool useExpiry = chk_DateFilter.Checked;
+
+            MedicinesManager manager = new MedicinesManager();
+            List<Medicines> result = manager.FilterActiveMedicines(selectedCompany, maxPrice, usePrice, expiryDate, useExpiry);
+
+            dgv_medicine.DataSource = null;
+            dgv_medicine.DataSource = result;
+
+            if (dgv_medicine.Columns.Count > 0)
+            {
+                dgv_medicine.Columns["Id"].DisplayIndex = 0;
+                dgv_medicine.Columns["Id"].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+                dgv_medicine.Columns["Id"].Width = 40;
+            }
+        }
+
+        private void txt_PriceFilter_TextChanged(object sender, EventArgs e)
+        {
+            ApplyMedicinesFilter();
+        }
+
+        private void cmb_CompanyFilter_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ApplyMedicinesFilter();
+        }
+
+        private void date_Filter_ValueChanged(object sender, EventArgs e)
+        {
+            ApplyMedicinesFilter();
+        }
+
+        private void btn_ClearFilter_Click(object sender, EventArgs e)
+        {
+            cmb_CompanyFilter.SelectedIndex = -1;
+            txt_PriceFilter.Text = "";
+            chk_DateFilter.Checked = false;
+            date_Filter.Enabled = false;
+
+            MedicinesManager manager = new MedicinesManager();
+            dgv_medicine.DataSource = null;
+            dgv_medicine.DataSource = manager.GetAllActiveMedicines();
+
+            if (dgv_medicine.Columns.Count > 0)
+            {
+                dgv_medicine.Columns["Id"].DisplayIndex = 0;
+                dgv_medicine.Columns["Id"].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+                dgv_medicine.Columns["Id"].Width = 40;
+            }
+        }
     }
+    
 }
