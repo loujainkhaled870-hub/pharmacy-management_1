@@ -469,6 +469,9 @@ namespace pharmacy_management_1
             CompanyManager compManager = new CompanyManager();
             List<Company> filterList = new List<Company>(compManager.GetAllCompanies());
             cmb_CompanyFilter.DataSource = null;
+            cmb_CompanyFilter.DataSource = filterList;
+            cmb_CompanyFilter.DisplayMember = "Name";
+            cmb_CompanyFilter.SelectedIndex = -1;
         }
 
 
@@ -722,6 +725,7 @@ namespace pharmacy_management_1
         private void btn_destroy_Click(object sender, EventArgs e)
         {
 
+        }
 
         private void btn_destroy_Click_1(object sender, EventArgs e)
         {
