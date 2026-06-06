@@ -1,16 +1,17 @@
 ﻿using Guna.UI2.WinForms;
+using pharmacy_management_1.Managers;
+using pharmacy_management_1.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics.Eventing.Reader;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using pharmacy_management_1.Managers;
-using pharmacy_management_1.Models;
-using System.Diagnostics.Eventing.Reader;
+using System.Xml.Linq;
 
 namespace pharmacy_management_1
 {
@@ -192,11 +193,32 @@ namespace pharmacy_management_1
             {
                 MessageBox.Show("please select a user from the table to delete  "
                        , "Selection Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
             }
             DataGridViewRow SelectedRow = dgv_users.CurrentRow;
             object cellvalue = SelectedRow.Cells["Id"].Value;
             int selectedUserId = Convert.ToInt32(cellvalue);
-
+            DialogResult = MessageBox.Show("are you sure you want to delete this user?","Confirm Deletion"
+                ,MessageBoxButtons.YesNo,MessageBoxIcon.Question);
+            
+            if (DialogResult == DialogResult.Yes)
+            {
+                UsersManager manager = new UsersManager();
+                manager.DeleteUser(selectedUserId);
+                MessageBox.Show("user deleted successfully ","Success"
+                    ,MessageBoxButtons.OK,MessageBoxIcon.Information);
+                dgv_users.DataSource = null;
+                dgv_users.DataSource = manager.GetAllUser();
+            }
+            if(dgv_users.Columns.Count > 0)
+            {
+                dgv_users.Columns["Id"].HeaderText = "Id";
+                dgv_users.Columns["Role"].HeaderText = "Role";
+                dgv_users.Columns["UserName"].HeaderText = "UserName";
+                dgv_users.Columns["Password"].HeaderText = "Password";
+            }
+            txt_newusername.Clear();
+            txt_newpassword.Clear();
         }
 
         //////////////////////////////////////////////////////////////////
@@ -212,7 +234,64 @@ namespace pharmacy_management_1
             {
                 MessageBox.Show("please select a user from the table to edit"
                       , "Selection Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
             }
+            DataGridViewRow SelectedRow = dgv_users.CurrentRow;
+            object cellvalue = SelectedRow.Cells["Id"].Value;
+            int selectedUserId = Convert.ToInt32(cellvalue);
+            string username = txt_newusername.Text.Trim();
+            string password = txt_newpassword.Text.Trim();
+            if (username == "" || password == "")
+            {
+                MessageBox.Show("please fill in all fields before editing !", "validation error"
+                 , MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            for (int i = 0; i < username.Length; i++)
+            {
+                if (username[i] >= '0' && username[i] <= '9')
+                {
+                    MessageBox.Show(" username must contain letters only", "Validation Error"
+                       , MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+            }
+            for (int i = 0; i < password.Length; i++)
+            {
+                char c = password[i];
+                if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'))
+                {
+                    MessageBox.Show(" password must contain numbers only", "Validation Error"
+                       , MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+            }
+            UserRole selectedRole;
+            if (cmb_Role.SelectedItem != null && cmb_Role.SelectedItem.ToString() == "SuperAdmin")
+            {
+                selectedRole = UserRole.SuperAdmin;
+            }
+            else
+            {
+                selectedRole = UserRole.Admin;
+            }
+            Users editeUser = new Users(selectedUserId,username, password, selectedRole);
+            UsersManager manager = new UsersManager();
+            manager.EditUser(selectedUserId,editeUser);
+            MessageBox.Show("user data has been edit successfully ", "Success"
+               , MessageBoxButtons.OK, MessageBoxIcon.Information);
+            dgv_users.DataSource = null;
+            dgv_users.DataSource = manager.GetAllUser();
+            if (dgv_users.Columns.Count > 0)
+            {
+                dgv_users.Columns["Id"].HeaderText = "Id";
+                dgv_users.Columns["Role"].HeaderText = "Role";
+                dgv_users.Columns["UserName"].HeaderText = "UserName";
+                dgv_users.Columns["Password"].HeaderText = "Password";
+            }
+            txt_newusername.Clear();
+            txt_newpassword.Clear();
 
 
         }
@@ -1004,19 +1083,36 @@ namespace pharmacy_management_1
                 Id = DataStore.InvoicesList.Count + 1,
                 Date = DateTime.Now,
                 TotalAmount = finalTotal,
-                Items = new List<InvoiceItem>(DataStore.cartList)
+                Items = new List<InvoiceItem>()
             };
+
+            for (int i = 0; i < DataStore.cartList.Count; i++)
+            {
+                InvoiceItem cartItem = DataStore.cartList[i];
+                InvoiceItem secureItem = new InvoiceItem
+                {
+                    Medicine = cartItem.Medicine,
+                    Quantity = cartItem.Quantity,
+                    Price = cartItem.Price,
+                    TotalPrice = cartItem.TotalPrice,
+                };
+                newInvoice.Items.Add(secureItem);
+            }
             DataStore.InvoicesList.Add(newInvoice);
 
             for (int i = 0; i < DataStore.cartList.Count; i++)
             {
                 InvoiceItem item = DataStore.cartList[i];
-                item.Medicine.Quantity = item.Medicine.Quantity - item.Quantity;
+                if (item.Medicine != null)
+                {
+                    item.Medicine.Quantity = item.Medicine.Quantity - item.Quantity;
+                }
+            }
                 MessageBox.Show("Invoice saved successfully ant stock has been update", "Success"
                     , MessageBoxButtons.OK, MessageBoxIcon.Information);
                 DataStore.cartList.Clear();
                 UpdateCartGrid();
-            }
+            
             UpdateInvoicesGrid();
         }
         private void UpdateInvoicesGrid()
@@ -1025,9 +1121,9 @@ namespace pharmacy_management_1
             dgv_invoices.DataSource = DataStore.InvoicesList;
             if (dgv_invoices.Columns.Count > 0)
             {
-                dgv_invoices.Columns["Id"].HeaderText = "Id";
-                dgv_invoices.Columns["Date"].HeaderText = "Date";
-                dgv_invoices.Columns["TotalAmount"].HeaderText = "Total";
+                if (dgv_invoices.Columns["Id"]!=null) dgv_invoices.Columns["Id"].HeaderText = "Id";
+                if (dgv_invoices.Columns["Date"] != null) dgv_invoices.Columns["Date"].HeaderText = "Date";
+                if (dgv_invoices.Columns["TotalAmount"] != null) dgv_invoices.Columns["TotalAmount"].HeaderText = "TotalAmount";
                 if (dgv_invoices.Columns["Items"] != null)
                 {
                     dgv_invoices.Columns["Items"].Visible = false;

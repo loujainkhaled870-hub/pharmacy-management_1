@@ -170,6 +170,7 @@
             btn_destroy = new Guna.UI2.WinForms.Guna2Button();
             dgv_expiredMedicines = new Guna.UI2.WinForms.Guna2DataGridView();
             tabPage3 = new TabPage();
+            label1 = new Label();
             btn_PosRemove = new Guna.UI2.WinForms.Guna2Button();
             btn_PosSave = new Guna.UI2.WinForms.Guna2Button();
             btn_PosAdd = new Guna.UI2.WinForms.Guna2Button();
@@ -179,10 +180,12 @@
             txt_PosPrice = new Guna.UI2.WinForms.Guna2TextBox();
             dgv_PosCart = new Guna.UI2.WinForms.Guna2DataGridView();
             tabPage4 = new TabPage();
+            guna2HtmlLabel1 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             txt_totalSales = new Guna.UI2.WinForms.Guna2TextBox();
             dgv_invoiceDetails = new Guna.UI2.WinForms.Guna2DataGridView();
             dgv_invoices = new Guna.UI2.WinForms.Guna2DataGridView();
             tabPage5 = new TabPage();
+            guna2HtmlLabel2 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             txt_companyPhone = new Guna.UI2.WinForms.Guna2TextBox();
             txt_companyName = new Guna.UI2.WinForms.Guna2TextBox();
             btn_showCompany = new Guna.UI2.WinForms.Guna2Button();
@@ -191,6 +194,7 @@
             btn_addCompany = new Guna.UI2.WinForms.Guna2Button();
             dgv_company = new Guna.UI2.WinForms.Guna2DataGridView();
             tabPage6 = new TabPage();
+            guna2HtmlLabel3 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             dgv_users = new Guna.UI2.WinForms.Guna2DataGridView();
             btn_showUser = new Guna.UI2.WinForms.Guna2Button();
             btn_deleteUser = new Guna.UI2.WinForms.Guna2Button();
@@ -504,7 +508,7 @@
             txt_scientificename.Font = new Font("Segoe UI", 9F);
             txt_scientificename.ForeColor = Color.Black;
             txt_scientificename.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            txt_scientificename.Location = new Point(982, 274);
+            txt_scientificename.Location = new Point(982, 257);
             txt_scientificename.Margin = new Padding(3, 4, 3, 4);
             txt_scientificename.Name = "txt_scientificename";
             txt_scientificename.PlaceholderForeColor = Color.Gray;
@@ -667,7 +671,7 @@
             cmb_company.ForeColor = Color.Black;
             cmb_company.IntegralHeight = false;
             cmb_company.ItemHeight = 40;
-            cmb_company.Location = new Point(820, 203);
+            cmb_company.Location = new Point(820, 178);
             cmb_company.Name = "cmb_company";
             cmb_company.ShadowDecoration.CustomizableEdges = customizableEdges26;
             cmb_company.Size = new Size(240, 46);
@@ -688,7 +692,7 @@
             txt_businessname.Font = new Font("Segoe UI", 9F);
             txt_businessname.ForeColor = Color.Black;
             txt_businessname.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            txt_businessname.Location = new Point(660, 274);
+            txt_businessname.Location = new Point(660, 257);
             txt_businessname.Margin = new Padding(3, 4, 3, 4);
             txt_businessname.Name = "txt_businessname";
             txt_businessname.PlaceholderForeColor = Color.Gray;
@@ -775,7 +779,7 @@
             btn_destroy.FillColor = Color.FromArgb(64, 138, 113);
             btn_destroy.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btn_destroy.ForeColor = Color.White;
-            btn_destroy.Location = new Point(926, 249);
+            btn_destroy.Location = new Point(943, 241);
             btn_destroy.Name = "btn_destroy";
             btn_destroy.ShadowDecoration.CustomizableEdges = customizableEdges30;
             btn_destroy.Size = new Size(225, 56);
@@ -812,7 +816,7 @@
             dgv_expiredMedicines.ReadOnly = true;
             dgv_expiredMedicines.RowHeadersVisible = false;
             dgv_expiredMedicines.RowHeadersWidth = 35;
-            dgv_expiredMedicines.Size = new Size(759, 605);
+            dgv_expiredMedicines.Size = new Size(814, 683);
             dgv_expiredMedicines.TabIndex = 1;
             dgv_expiredMedicines.Theme = Guna.UI2.WinForms.Enums.DataGridViewPresetThemes.Light;
             dgv_expiredMedicines.ThemeStyle.AlternatingRowsStyle.BackColor = Color.FromArgb(247, 248, 249);
@@ -840,6 +844,7 @@
             // tabPage3
             // 
             tabPage3.BackColor = Color.FromArgb(230, 245, 235);
+            tabPage3.Controls.Add(label1);
             tabPage3.Controls.Add(btn_PosRemove);
             tabPage3.Controls.Add(btn_PosSave);
             tabPage3.Controls.Add(btn_PosAdd);
@@ -854,6 +859,16 @@
             tabPage3.TabIndex = 2;
             tabPage3.Text = "tabPage3";
             // 
+            // label1
+            // 
+            label1.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label1.ForeColor = Color.FromArgb(64, 138, 113);
+            label1.Location = new Point(749, 544);
+            label1.Name = "label1";
+            label1.Size = new Size(85, 36);
+            label1.TabIndex = 8;
+            label1.Text = "Total :";
+            // 
             // btn_PosRemove
             // 
             btn_PosRemove.BorderRadius = 20;
@@ -865,7 +880,10 @@
             btn_PosRemove.FillColor = Color.FromArgb(64, 138, 113);
             btn_PosRemove.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btn_PosRemove.ForeColor = Color.White;
-            btn_PosRemove.Location = new Point(686, 425);
+            btn_PosRemove.Image = Properties.Resources.trash;
+            btn_PosRemove.ImageAlign = HorizontalAlignment.Left;
+            btn_PosRemove.ImageSize = new Size(30, 30);
+            btn_PosRemove.Location = new Point(840, 292);
             btn_PosRemove.Name = "btn_PosRemove";
             btn_PosRemove.ShadowDecoration.CustomizableEdges = customizableEdges32;
             btn_PosRemove.Size = new Size(225, 56);
@@ -884,7 +902,7 @@
             btn_PosSave.FillColor = Color.FromArgb(64, 138, 113);
             btn_PosSave.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btn_PosSave.ForeColor = Color.White;
-            btn_PosSave.Location = new Point(1017, 425);
+            btn_PosSave.Location = new Point(840, 386);
             btn_PosSave.Name = "btn_PosSave";
             btn_PosSave.ShadowDecoration.CustomizableEdges = customizableEdges34;
             btn_PosSave.Size = new Size(225, 56);
@@ -903,7 +921,10 @@
             btn_PosAdd.FillColor = Color.FromArgb(64, 138, 113);
             btn_PosAdd.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btn_PosAdd.ForeColor = Color.White;
-            btn_PosAdd.Location = new Point(829, 194);
+            btn_PosAdd.Image = Properties.Resources._14734606;
+            btn_PosAdd.ImageAlign = HorizontalAlignment.Left;
+            btn_PosAdd.ImageSize = new Size(30, 30);
+            btn_PosAdd.Location = new Point(840, 203);
             btn_PosAdd.Name = "btn_PosAdd";
             btn_PosAdd.ShadowDecoration.CustomizableEdges = customizableEdges36;
             btn_PosAdd.Size = new Size(225, 56);
@@ -925,7 +946,7 @@
             cmb_PosMedicine.Font = new Font("Segoe UI", 10F);
             cmb_PosMedicine.ForeColor = Color.Black;
             cmb_PosMedicine.ItemHeight = 40;
-            cmb_PosMedicine.Location = new Point(813, 29);
+            cmb_PosMedicine.Location = new Point(829, 39);
             cmb_PosMedicine.Name = "cmb_PosMedicine";
             cmb_PosMedicine.ShadowDecoration.CustomizableEdges = customizableEdges38;
             cmb_PosMedicine.Size = new Size(250, 46);
@@ -952,7 +973,7 @@
             txt_PosTotal.Margin = new Padding(3, 4, 3, 4);
             txt_PosTotal.Name = "txt_PosTotal";
             txt_PosTotal.PlaceholderForeColor = Color.Gray;
-            txt_PosTotal.PlaceholderText = "Total";
+            txt_PosTotal.PlaceholderText = "";
             txt_PosTotal.ReadOnly = true;
             txt_PosTotal.SelectedText = "";
             txt_PosTotal.ShadowDecoration.CustomizableEdges = customizableEdges40;
@@ -974,7 +995,7 @@
             txt_PosQuantity.Font = new Font("Segoe UI", 9F);
             txt_PosQuantity.ForeColor = Color.Black;
             txt_PosQuantity.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            txt_PosQuantity.Location = new Point(673, 115);
+            txt_PosQuantity.Location = new Point(686, 115);
             txt_PosQuantity.Margin = new Padding(3, 4, 3, 4);
             txt_PosQuantity.Name = "txt_PosQuantity";
             txt_PosQuantity.PlaceholderForeColor = Color.Gray;
@@ -999,7 +1020,7 @@
             txt_PosPrice.Font = new Font("Segoe UI", 9F);
             txt_PosPrice.ForeColor = Color.Black;
             txt_PosPrice.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            txt_PosPrice.Location = new Point(992, 115);
+            txt_PosPrice.Location = new Point(1017, 115);
             txt_PosPrice.Margin = new Padding(3, 4, 3, 4);
             txt_PosPrice.Name = "txt_PosPrice";
             txt_PosPrice.PlaceholderForeColor = Color.Gray;
@@ -1038,7 +1059,7 @@
             dgv_PosCart.ReadOnly = true;
             dgv_PosCart.RowHeadersVisible = false;
             dgv_PosCart.RowHeadersWidth = 51;
-            dgv_PosCart.Size = new Size(632, 609);
+            dgv_PosCart.Size = new Size(664, 687);
             dgv_PosCart.TabIndex = 0;
             dgv_PosCart.ThemeStyle.AlternatingRowsStyle.BackColor = Color.White;
             dgv_PosCart.ThemeStyle.AlternatingRowsStyle.Font = null;
@@ -1065,33 +1086,55 @@
             // tabPage4
             // 
             tabPage4.BackColor = Color.FromArgb(230, 245, 235);
+            tabPage4.Controls.Add(guna2HtmlLabel1);
             tabPage4.Controls.Add(txt_totalSales);
             tabPage4.Controls.Add(dgv_invoiceDetails);
             tabPage4.Controls.Add(dgv_invoices);
+            tabPage4.Font = new Font("Impact", 16.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
             tabPage4.Location = new Point(5, 4);
             tabPage4.Name = "tabPage4";
             tabPage4.Size = new Size(1283, 695);
             tabPage4.TabIndex = 3;
             tabPage4.Text = "tabPage4";
             // 
+            // guna2HtmlLabel1
+            // 
+            guna2HtmlLabel1.AutoSize = false;
+            guna2HtmlLabel1.BackColor = Color.Transparent;
+            guna2HtmlLabel1.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            guna2HtmlLabel1.ForeColor = Color.FromArgb(64, 138, 113);
+            guna2HtmlLabel1.Location = new Point(150, 23);
+            guna2HtmlLabel1.Name = "guna2HtmlLabel1";
+            guna2HtmlLabel1.Size = new Size(220, 46);
+            guna2HtmlLabel1.TabIndex = 3;
+            guna2HtmlLabel1.Text = "Invoice History";
+            // 
             // txt_totalSales
             // 
+            txt_totalSales.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            txt_totalSales.BorderColor = Color.White;
+            txt_totalSales.BorderRadius = 20;
+            txt_totalSales.BorderThickness = 2;
             txt_totalSales.CustomizableEdges = customizableEdges45;
             txt_totalSales.DefaultText = "";
             txt_totalSales.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
             txt_totalSales.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
             txt_totalSales.DisabledState.ForeColor = Color.FromArgb(138, 138, 138);
             txt_totalSales.DisabledState.PlaceholderForeColor = Color.FromArgb(138, 138, 138);
+            txt_totalSales.FillColor = Color.FromArgb(64, 138, 113);
             txt_totalSales.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
-            txt_totalSales.Font = new Font("Segoe UI", 9F);
+            txt_totalSales.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txt_totalSales.ForeColor = Color.White;
             txt_totalSales.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            txt_totalSales.Location = new Point(824, 625);
-            txt_totalSales.Margin = new Padding(3, 4, 3, 4);
+            txt_totalSales.Location = new Point(858, 634);
+            txt_totalSales.Margin = new Padding(4, 5, 4, 5);
             txt_totalSales.Name = "txt_totalSales";
-            txt_totalSales.PlaceholderText = "";
+            txt_totalSales.PlaceholderForeColor = Color.White;
+            txt_totalSales.PlaceholderText = "Total Sales :";
+            txt_totalSales.ReadOnly = true;
             txt_totalSales.SelectedText = "";
             txt_totalSales.ShadowDecoration.CustomizableEdges = customizableEdges46;
-            txt_totalSales.Size = new Size(286, 60);
+            txt_totalSales.Size = new Size(250, 50);
             txt_totalSales.TabIndex = 2;
             // 
             // dgv_invoiceDetails
@@ -1100,31 +1143,32 @@
             dgv_invoiceDetails.AllowUserToDeleteRows = false;
             dataGridViewCellStyle10.BackColor = Color.White;
             dgv_invoiceDetails.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle10;
+            dgv_invoiceDetails.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
             dataGridViewCellStyle11.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle11.BackColor = Color.FromArgb(100, 88, 255);
-            dataGridViewCellStyle11.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle11.Font = new Font("Impact", 16.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
             dataGridViewCellStyle11.ForeColor = Color.White;
             dataGridViewCellStyle11.SelectionBackColor = SystemColors.Highlight;
             dataGridViewCellStyle11.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle11.WrapMode = DataGridViewTriState.True;
             dgv_invoiceDetails.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle11;
-            dgv_invoiceDetails.ColumnHeadersHeight = 4;
+            dgv_invoiceDetails.ColumnHeadersHeight = 35;
             dgv_invoiceDetails.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
             dataGridViewCellStyle12.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle12.BackColor = Color.White;
-            dataGridViewCellStyle12.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle12.Font = new Font("Impact", 16.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
             dataGridViewCellStyle12.ForeColor = Color.FromArgb(71, 69, 94);
             dataGridViewCellStyle12.SelectionBackColor = Color.FromArgb(231, 229, 255);
             dataGridViewCellStyle12.SelectionForeColor = Color.FromArgb(71, 69, 94);
             dataGridViewCellStyle12.WrapMode = DataGridViewTriState.False;
             dgv_invoiceDetails.DefaultCellStyle = dataGridViewCellStyle12;
             dgv_invoiceDetails.GridColor = Color.FromArgb(231, 229, 255);
-            dgv_invoiceDetails.Location = new Point(824, 5);
+            dgv_invoiceDetails.Location = new Point(713, 5);
             dgv_invoiceDetails.Name = "dgv_invoiceDetails";
             dgv_invoiceDetails.ReadOnly = true;
             dgv_invoiceDetails.RowHeadersVisible = false;
             dgv_invoiceDetails.RowHeadersWidth = 51;
-            dgv_invoiceDetails.Size = new Size(456, 603);
+            dgv_invoiceDetails.Size = new Size(567, 603);
             dgv_invoiceDetails.TabIndex = 1;
             dgv_invoiceDetails.ThemeStyle.AlternatingRowsStyle.BackColor = Color.White;
             dgv_invoiceDetails.ThemeStyle.AlternatingRowsStyle.Font = null;
@@ -1138,7 +1182,7 @@
             dgv_invoiceDetails.ThemeStyle.HeaderStyle.Font = new Font("Segoe UI", 9F);
             dgv_invoiceDetails.ThemeStyle.HeaderStyle.ForeColor = Color.White;
             dgv_invoiceDetails.ThemeStyle.HeaderStyle.HeaightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
-            dgv_invoiceDetails.ThemeStyle.HeaderStyle.Height = 4;
+            dgv_invoiceDetails.ThemeStyle.HeaderStyle.Height = 35;
             dgv_invoiceDetails.ThemeStyle.ReadOnly = true;
             dgv_invoiceDetails.ThemeStyle.RowsStyle.BackColor = Color.White;
             dgv_invoiceDetails.ThemeStyle.RowsStyle.BorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
@@ -1152,26 +1196,27 @@
             // 
             dataGridViewCellStyle13.BackColor = Color.White;
             dgv_invoices.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle13;
+            dgv_invoices.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
             dataGridViewCellStyle14.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle14.BackColor = Color.FromArgb(100, 88, 255);
-            dataGridViewCellStyle14.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle14.Font = new Font("Impact", 16.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
             dataGridViewCellStyle14.ForeColor = Color.White;
             dataGridViewCellStyle14.SelectionBackColor = SystemColors.Highlight;
             dataGridViewCellStyle14.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle14.WrapMode = DataGridViewTriState.True;
             dgv_invoices.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle14;
-            dgv_invoices.ColumnHeadersHeight = 4;
+            dgv_invoices.ColumnHeadersHeight = 35;
             dgv_invoices.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
             dataGridViewCellStyle15.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle15.BackColor = Color.White;
-            dataGridViewCellStyle15.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle15.Font = new Font("Impact", 16.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
             dataGridViewCellStyle15.ForeColor = Color.FromArgb(71, 69, 94);
             dataGridViewCellStyle15.SelectionBackColor = Color.FromArgb(231, 229, 255);
             dataGridViewCellStyle15.SelectionForeColor = Color.FromArgb(71, 69, 94);
             dataGridViewCellStyle15.WrapMode = DataGridViewTriState.False;
             dgv_invoices.DefaultCellStyle = dataGridViewCellStyle15;
             dgv_invoices.GridColor = Color.FromArgb(231, 229, 255);
-            dgv_invoices.Location = new Point(3, 5);
+            dgv_invoices.Location = new Point(3, 83);
             dgv_invoices.Name = "dgv_invoices";
             dgv_invoices.ReadOnly = true;
             dgv_invoices.RowHeadersVisible = false;
@@ -1190,7 +1235,7 @@
             dgv_invoices.ThemeStyle.HeaderStyle.Font = new Font("Segoe UI", 9F);
             dgv_invoices.ThemeStyle.HeaderStyle.ForeColor = Color.White;
             dgv_invoices.ThemeStyle.HeaderStyle.HeaightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
-            dgv_invoices.ThemeStyle.HeaderStyle.Height = 4;
+            dgv_invoices.ThemeStyle.HeaderStyle.Height = 35;
             dgv_invoices.ThemeStyle.ReadOnly = true;
             dgv_invoices.ThemeStyle.RowsStyle.BackColor = Color.White;
             dgv_invoices.ThemeStyle.RowsStyle.BorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
@@ -1204,6 +1249,7 @@
             // tabPage5
             // 
             tabPage5.BackColor = Color.FromArgb(230, 245, 235);
+            tabPage5.Controls.Add(guna2HtmlLabel2);
             tabPage5.Controls.Add(txt_companyPhone);
             tabPage5.Controls.Add(txt_companyName);
             tabPage5.Controls.Add(btn_showCompany);
@@ -1216,6 +1262,17 @@
             tabPage5.Size = new Size(1283, 695);
             tabPage5.TabIndex = 4;
             tabPage5.Text = "tabPage5";
+            // 
+            // guna2HtmlLabel2
+            // 
+            guna2HtmlLabel2.BackColor = Color.Transparent;
+            guna2HtmlLabel2.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            guna2HtmlLabel2.ForeColor = Color.FromArgb(64, 138, 113);
+            guna2HtmlLabel2.Location = new Point(98, 25);
+            guna2HtmlLabel2.Name = "guna2HtmlLabel2";
+            guna2HtmlLabel2.Size = new Size(323, 39);
+            guna2HtmlLabel2.TabIndex = 14;
+            guna2HtmlLabel2.Text = "Companies Management";
             // 
             // txt_companyPhone
             // 
@@ -1232,7 +1289,7 @@
             txt_companyPhone.Font = new Font("Segoe UI", 9F);
             txt_companyPhone.ForeColor = Color.Black;
             txt_companyPhone.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            txt_companyPhone.Location = new Point(661, 160);
+            txt_companyPhone.Location = new Point(972, 134);
             txt_companyPhone.Margin = new Padding(3, 4, 3, 4);
             txt_companyPhone.Name = "txt_companyPhone";
             txt_companyPhone.PlaceholderForeColor = Color.Gray;
@@ -1257,7 +1314,7 @@
             txt_companyName.Font = new Font("Segoe UI", 9F);
             txt_companyName.ForeColor = Color.Black;
             txt_companyName.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            txt_companyName.Location = new Point(661, 92);
+            txt_companyName.Location = new Point(666, 134);
             txt_companyName.Margin = new Padding(3, 4, 3, 4);
             txt_companyName.Name = "txt_companyName";
             txt_companyName.PlaceholderForeColor = Color.Gray;
@@ -1281,7 +1338,7 @@
             btn_showCompany.Image = Properties.Resources.visibility;
             btn_showCompany.ImageAlign = HorizontalAlignment.Left;
             btn_showCompany.ImageSize = new Size(30, 30);
-            btn_showCompany.Location = new Point(831, 425);
+            btn_showCompany.Location = new Point(817, 415);
             btn_showCompany.Name = "btn_showCompany";
             btn_showCompany.ShadowDecoration.CustomizableEdges = customizableEdges52;
             btn_showCompany.Size = new Size(225, 56);
@@ -1303,7 +1360,7 @@
             btn_deleteCompany.Image = Properties.Resources.trash;
             btn_deleteCompany.ImageAlign = HorizontalAlignment.Left;
             btn_deleteCompany.ImageSize = new Size(30, 30);
-            btn_deleteCompany.Location = new Point(539, 425);
+            btn_deleteCompany.Location = new Point(817, 500);
             btn_deleteCompany.Name = "btn_deleteCompany";
             btn_deleteCompany.ShadowDecoration.CustomizableEdges = customizableEdges54;
             btn_deleteCompany.Size = new Size(225, 56);
@@ -1325,7 +1382,7 @@
             btn_editCompany.Image = Properties.Resources._10426353;
             btn_editCompany.ImageAlign = HorizontalAlignment.Left;
             btn_editCompany.ImageSize = new Size(30, 30);
-            btn_editCompany.Location = new Point(831, 326);
+            btn_editCompany.Location = new Point(817, 335);
             btn_editCompany.Name = "btn_editCompany";
             btn_editCompany.ShadowDecoration.CustomizableEdges = customizableEdges56;
             btn_editCompany.Size = new Size(225, 56);
@@ -1347,7 +1404,7 @@
             btn_addCompany.Image = Properties.Resources._14734606;
             btn_addCompany.ImageAlign = HorizontalAlignment.Left;
             btn_addCompany.ImageSize = new Size(30, 30);
-            btn_addCompany.Location = new Point(539, 326);
+            btn_addCompany.Location = new Point(817, 252);
             btn_addCompany.Name = "btn_addCompany";
             btn_addCompany.ShadowDecoration.CustomizableEdges = customizableEdges58;
             btn_addCompany.Size = new Size(225, 56);
@@ -1381,7 +1438,7 @@
             dataGridViewCellStyle18.WrapMode = DataGridViewTriState.False;
             dgv_company.DefaultCellStyle = dataGridViewCellStyle18;
             dgv_company.GridColor = Color.FromArgb(231, 229, 255);
-            dgv_company.Location = new Point(3, 5);
+            dgv_company.Location = new Point(3, 83);
             dgv_company.Name = "dgv_company";
             dgv_company.ReadOnly = true;
             dgv_company.RightToLeft = RightToLeft.No;
@@ -1395,7 +1452,7 @@
             dgv_company.RowHeadersDefaultCellStyle = dataGridViewCellStyle19;
             dgv_company.RowHeadersVisible = false;
             dgv_company.RowHeadersWidth = 51;
-            dgv_company.Size = new Size(512, 609);
+            dgv_company.Size = new Size(567, 609);
             dgv_company.TabIndex = 8;
             dgv_company.ThemeStyle.AlternatingRowsStyle.BackColor = Color.White;
             dgv_company.ThemeStyle.AlternatingRowsStyle.Font = null;
@@ -1423,6 +1480,7 @@
             // tabPage6
             // 
             tabPage6.BackColor = Color.FromArgb(230, 245, 235);
+            tabPage6.Controls.Add(guna2HtmlLabel3);
             tabPage6.Controls.Add(dgv_users);
             tabPage6.Controls.Add(btn_showUser);
             tabPage6.Controls.Add(btn_deleteUser);
@@ -1436,6 +1494,17 @@
             tabPage6.Size = new Size(1283, 695);
             tabPage6.TabIndex = 5;
             tabPage6.Text = "tabPage6";
+            // 
+            // guna2HtmlLabel3
+            // 
+            guna2HtmlLabel3.BackColor = Color.Transparent;
+            guna2HtmlLabel3.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            guna2HtmlLabel3.ForeColor = Color.FromArgb(64, 138, 113);
+            guna2HtmlLabel3.Location = new Point(154, 24);
+            guna2HtmlLabel3.Name = "guna2HtmlLabel3";
+            guna2HtmlLabel3.Size = new Size(251, 39);
+            guna2HtmlLabel3.TabIndex = 8;
+            guna2HtmlLabel3.Text = "Users Management";
             // 
             // dgv_users
             // 
@@ -1463,7 +1532,7 @@
             dataGridViewCellStyle22.WrapMode = DataGridViewTriState.False;
             dgv_users.DefaultCellStyle = dataGridViewCellStyle22;
             dgv_users.GridColor = Color.FromArgb(231, 229, 255);
-            dgv_users.Location = new Point(3, 5);
+            dgv_users.Location = new Point(-2, 87);
             dgv_users.Name = "dgv_users";
             dgv_users.ReadOnly = true;
             dgv_users.RightToLeft = RightToLeft.No;
@@ -1477,7 +1546,7 @@
             dgv_users.RowHeadersDefaultCellStyle = dataGridViewCellStyle23;
             dgv_users.RowHeadersVisible = false;
             dgv_users.RowHeadersWidth = 51;
-            dgv_users.Size = new Size(512, 609);
+            dgv_users.Size = new Size(623, 609);
             dgv_users.TabIndex = 7;
             dgv_users.ThemeStyle.AlternatingRowsStyle.BackColor = Color.White;
             dgv_users.ThemeStyle.AlternatingRowsStyle.Font = null;
@@ -1515,7 +1584,7 @@
             btn_showUser.Image = Properties.Resources.visibility;
             btn_showUser.ImageAlign = HorizontalAlignment.Left;
             btn_showUser.ImageSize = new Size(30, 30);
-            btn_showUser.Location = new Point(818, 326);
+            btn_showUser.Location = new Point(869, 382);
             btn_showUser.Name = "btn_showUser";
             btn_showUser.ShadowDecoration.CustomizableEdges = customizableEdges60;
             btn_showUser.Size = new Size(225, 56);
@@ -1537,7 +1606,7 @@
             btn_deleteUser.Image = Properties.Resources.trash;
             btn_deleteUser.ImageAlign = HorizontalAlignment.Left;
             btn_deleteUser.ImageSize = new Size(30, 30);
-            btn_deleteUser.Location = new Point(555, 326);
+            btn_deleteUser.Location = new Point(869, 469);
             btn_deleteUser.Name = "btn_deleteUser";
             btn_deleteUser.ShadowDecoration.CustomizableEdges = customizableEdges62;
             btn_deleteUser.Size = new Size(225, 56);
@@ -1559,7 +1628,7 @@
             dtn_editUser.Image = Properties.Resources._10426353;
             dtn_editUser.ImageAlign = HorizontalAlignment.Left;
             dtn_editUser.ImageSize = new Size(30, 30);
-            dtn_editUser.Location = new Point(818, 227);
+            dtn_editUser.Location = new Point(869, 302);
             dtn_editUser.Name = "dtn_editUser";
             dtn_editUser.ShadowDecoration.CustomizableEdges = customizableEdges64;
             dtn_editUser.Size = new Size(225, 56);
@@ -1581,7 +1650,7 @@
             btn_addUser.Image = Properties.Resources._14734606;
             btn_addUser.ImageAlign = HorizontalAlignment.Left;
             btn_addUser.ImageSize = new Size(30, 30);
-            btn_addUser.Location = new Point(555, 227);
+            btn_addUser.Location = new Point(869, 218);
             btn_addUser.Name = "btn_addUser";
             btn_addUser.ShadowDecoration.CustomizableEdges = customizableEdges66;
             btn_addUser.Size = new Size(225, 56);
@@ -1605,11 +1674,10 @@
             cmb_Role.IntegralHeight = false;
             cmb_Role.ItemHeight = 42;
             cmb_Role.Items.AddRange(new object[] { "SuperAdmin", "Admin" });
-            cmb_Role.Location = new Point(657, 47);
+            cmb_Role.Location = new Point(835, 50);
             cmb_Role.Name = "cmb_Role";
             cmb_Role.ShadowDecoration.CustomizableEdges = customizableEdges68;
             cmb_Role.Size = new Size(250, 48);
-            cmb_Role.StartIndex = 0;
             cmb_Role.TabIndex = 2;
             // 
             // txt_newpassword
@@ -1627,7 +1695,7 @@
             txt_newpassword.Font = new Font("Segoe UI", 9F);
             txt_newpassword.ForeColor = Color.Black;
             txt_newpassword.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            txt_newpassword.Location = new Point(818, 134);
+            txt_newpassword.Location = new Point(1011, 134);
             txt_newpassword.Margin = new Padding(3, 4, 3, 4);
             txt_newpassword.Name = "txt_newpassword";
             txt_newpassword.PlaceholderForeColor = Color.Gray;
@@ -1653,7 +1721,7 @@
             txt_newusername.Font = new Font("Segoe UI", 9F);
             txt_newusername.ForeColor = Color.Black;
             txt_newusername.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            txt_newusername.Location = new Point(543, 134);
+            txt_newusername.Location = new Point(712, 134);
             txt_newusername.Margin = new Padding(3, 4, 3, 4);
             txt_newusername.Name = "txt_newusername";
             txt_newusername.PlaceholderForeColor = Color.Gray;
@@ -1848,8 +1916,10 @@
             ((System.ComponentModel.ISupportInitialize)dgv_invoiceDetails).EndInit();
             ((System.ComponentModel.ISupportInitialize)dgv_invoices).EndInit();
             tabPage5.ResumeLayout(false);
+            tabPage5.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgv_company).EndInit();
             tabPage6.ResumeLayout(false);
+            tabPage6.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgv_users).EndInit();
             panSideNavbar.ResumeLayout(false);
             ResumeLayout(false);
@@ -1923,5 +1993,9 @@
         private Guna.UI2.WinForms.Guna2Button btn_PosSave;
         private Guna.UI2.WinForms.Guna2DataGridView dgv_invoiceDetails;
         private Guna.UI2.WinForms.Guna2TextBox txt_totalSales;
+        private Label label1;
+        private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel1;
+        private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel2;
+        private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel3;
     }
 }
