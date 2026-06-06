@@ -112,27 +112,12 @@ namespace pharmacy_management_1
                 return;
             }
 
-            for (int i = 0; i < username.Length; i++)
+            if (cmb_Role.SelectedIndex == -1 || cmb_Role.SelectedIndex == null)
             {
-                char c = username[i];
-                if (c >= '0' && c <= '9')
-                {
-                    MessageBox.Show("Username must contain letters only ! numbers are not allowed "
-                        , "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
+                MessageBox.Show("please select a User Role from the list", "Warning"
+                    , MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
             }
-            for (int i = 0; i < password.Length; i++)
-            {
-                char c = password[i];
-                if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'))
-                {
-                    MessageBox.Show("Password must contain numbers only ! letters are not allowed "
-                        , "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-            }
-
 
             bool isUsernameExists = false;
             List<Users> allusers = manager.GetAllUser();
@@ -196,29 +181,41 @@ namespace pharmacy_management_1
                 return;
             }
             DataGridViewRow SelectedRow = dgv_users.CurrentRow;
+
+            if (SelectedRow.Cells["Role"].Value != null && SelectedRow.Cells["Role"].Value.ToString() == "SuperAdmin")
+            {
+                MessageBox.Show("Access Denied! the superadmin account cannot be deleted ", "Security Protection"
+                    , MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             object cellvalue = SelectedRow.Cells["Id"].Value;
             int selectedUserId = Convert.ToInt32(cellvalue);
-            DialogResult = MessageBox.Show("are you sure you want to delete this user?","Confirm Deletion"
-                ,MessageBoxButtons.YesNo,MessageBoxIcon.Question);
-            
-            if (DialogResult == DialogResult.Yes)
+            DialogResult dialogResult = MessageBox.Show("are you sure you want to delete this user?", "Confirm Deletion"
+                , MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (dialogResult == DialogResult.Yes)
             {
                 UsersManager manager = new UsersManager();
                 manager.DeleteUser(selectedUserId);
-                MessageBox.Show("user deleted successfully ","Success"
-                    ,MessageBoxButtons.OK,MessageBoxIcon.Information);
+                MessageBox.Show("user deleted successfully ", "Success"
+                    , MessageBoxButtons.OK, MessageBoxIcon.Information);
                 dgv_users.DataSource = null;
-                dgv_users.DataSource = manager.GetAllUser();
+                dgv_users.DataSource = DataStore.UsersList;
+                if (dgv_users.Columns.Count > 0)
+                {
+                    dgv_users.Columns["Id"].DisplayIndex = 0;
+                    dgv_users.Columns["Role"].DisplayIndex = 1;
+
+                    dgv_users.Columns["Id"].HeaderText = "Id";
+                    dgv_users.Columns["Role"].HeaderText = "Role";
+                    dgv_users.Columns["UserName"].HeaderText = "UserName";
+                    dgv_users.Columns["Password"].HeaderText = "Password";
+                }
+                txt_newusername.Clear();
+                txt_newpassword.Clear();
             }
-            if(dgv_users.Columns.Count > 0)
-            {
-                dgv_users.Columns["Id"].HeaderText = "Id";
-                dgv_users.Columns["Role"].HeaderText = "Role";
-                dgv_users.Columns["UserName"].HeaderText = "UserName";
-                dgv_users.Columns["Password"].HeaderText = "Password";
-            }
-            txt_newusername.Clear();
-            txt_newpassword.Clear();
+
+
         }
 
         //////////////////////////////////////////////////////////////////
@@ -247,26 +244,6 @@ namespace pharmacy_management_1
                  , MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-
-            for (int i = 0; i < username.Length; i++)
-            {
-                if (username[i] >= '0' && username[i] <= '9')
-                {
-                    MessageBox.Show(" username must contain letters only", "Validation Error"
-                       , MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-            }
-            for (int i = 0; i < password.Length; i++)
-            {
-                char c = password[i];
-                if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'))
-                {
-                    MessageBox.Show(" password must contain numbers only", "Validation Error"
-                       , MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-            }
             UserRole selectedRole;
             if (cmb_Role.SelectedItem != null && cmb_Role.SelectedItem.ToString() == "SuperAdmin")
             {
@@ -276,15 +253,18 @@ namespace pharmacy_management_1
             {
                 selectedRole = UserRole.Admin;
             }
-            Users editeUser = new Users(selectedUserId,username, password, selectedRole);
+            Users editeUser = new Users(selectedUserId, username, password, selectedRole);
             UsersManager manager = new UsersManager();
-            manager.EditUser(selectedUserId,editeUser);
+            manager.EditUser(selectedUserId, editeUser);
             MessageBox.Show("user data has been edit successfully ", "Success"
                , MessageBoxButtons.OK, MessageBoxIcon.Information);
             dgv_users.DataSource = null;
             dgv_users.DataSource = manager.GetAllUser();
             if (dgv_users.Columns.Count > 0)
             {
+                dgv_users.Columns["Id"].DisplayIndex = 0;
+                dgv_users.Columns["Role"].DisplayIndex = 1;
+
                 dgv_users.Columns["Id"].HeaderText = "Id";
                 dgv_users.Columns["Role"].HeaderText = "Role";
                 dgv_users.Columns["UserName"].HeaderText = "UserName";
@@ -313,16 +293,6 @@ namespace pharmacy_management_1
                 MessageBox.Show("please fill in all fields before adding a company!", "validation error"
                   , MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
-            }
-
-            for (int i = 0; i < name.Length; i++)
-            {
-                if (name[i] >= '0' && name[i] <= '9')
-                {
-                    MessageBox.Show("company name must contain letters only", "Validation Error"
-                        , MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
             }
 
             for (int i = 0; i < phone.Length; i++)
@@ -403,16 +373,6 @@ namespace pharmacy_management_1
                  , MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-
-            for (int i = 0; i < name.Length; i++)
-            {
-                if (name[i] >= '0' && name[i] <= '9')
-                {
-                    MessageBox.Show("company name must contain letters only", "Validation Error"
-                       , MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-            }
             for (int i = 0; i < phone.Length; i++)
             {
                 char c = phone[i];
@@ -475,31 +435,33 @@ namespace pharmacy_management_1
                     , MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 dgv_company.DataSource = null;
-                dgv_company.DataSource = manager.GetAllCompanies();
-            }
-            if (dgv_company.Columns.Count > 0)
-            {
-                dgv_company.Columns["Id"].DisplayIndex = 0;
-                dgv_company.Columns["Name"].DisplayIndex = 1;
-                dgv_company.Columns["Phone"].DisplayIndex = 2;
+                dgv_company.DataSource = DataStore.CompaniesList;
+                if (dgv_company.Columns.Count > 0)
+                {
+                    dgv_company.Columns["Id"].DisplayIndex = 0;
+                    dgv_company.Columns["Name"].DisplayIndex = 1;
+                    dgv_company.Columns["Phone"].DisplayIndex = 2;
 
-                dgv_company.Columns["Id"].HeaderText = "Company Id";
-                dgv_company.Columns["Name"].HeaderText = "Company Name";
-                dgv_company.Columns["Phone"].HeaderText = "Phone Number";
+                    dgv_company.Columns["Id"].HeaderText = "Company Id";
+                    dgv_company.Columns["Name"].HeaderText = "Company Name";
+                    dgv_company.Columns["Phone"].HeaderText = "Phone Number";
+                }
+
+                txt_companyName.Clear();
+                txt_companyPhone.Clear();
+                txt_companyName.Focus();
             }
 
-            txt_companyName.Clear();
-            txt_companyPhone.Clear();
-            txt_companyName.Focus();
 
         }
 
         private void dgv_company_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (dgv_company.CurrentRow != null)
+            if (dgv_company.CurrentRow != null && dgv_company.CurrentRow.DataBoundItem != null)
             {
-                txt_companyName.Text = dgv_company.CurrentRow.Cells["Name"].Value.ToString();
-                txt_companyPhone.Text = dgv_company.CurrentRow.Cells["phone"].Value.ToString();
+                Company comp = (Company)dgv_company.CurrentRow.DataBoundItem;
+                txt_companyName.Text = comp.Name;
+                txt_companyPhone.Text = comp.Phone;
             }
         }
 
@@ -527,13 +489,6 @@ namespace pharmacy_management_1
             btn_Medicines.Checked = true;
             RefreshCompaniesComboBoxes();
 
-            //CompanyManager companyManager = new CompanyManager();
-            //List<Company> list = companyManager.GetAllCompanies();
-            //cmb_company.DataSource = null;
-            //cmb_company.DataSource = list;
-            //cmb_company.DisplayMember = "Name";
-            //cmb_company.SelectedIndex = -1;
-
             MedicinesManager manager = new MedicinesManager();
             manager.CheckAndMoveExpiredMedicines();
             dgv_medicine.DataSource = null;
@@ -548,17 +503,12 @@ namespace pharmacy_management_1
             {
                 dgv_expiredMedicines.Columns["Id"].DisplayIndex = 0;
             }
-            //CompanyManager compManager = new CompanyManager();
-            //List<Company> filterList = new List<Company>(compManager.GetAllCompanies());
-            //cmb_CompanyFilter.DataSource = null;
-            //cmb_CompanyFilter.DataSource = filterList;
-            //cmb_CompanyFilter.DisplayMember = "Name";
-            //cmb_CompanyFilter.SelectedIndex = -1;
 
             RefreshPosMedicinesComboBoxes();
             txt_PosTotal.Text = "0";
 
             UpdateInvoicesGrid();
+
         }
 
 
@@ -652,7 +602,8 @@ namespace pharmacy_management_1
 
             if (dgv_medicine.CurrentRow == null)
             {
-                MessageBox.Show("Please select a medicine from the table to delete!", "Selection Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Please select a medicine from the table to delete!", "Selection Error"
+                    , MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
             DataGridViewRow selectedRow = dgv_medicine.CurrentRow;
@@ -982,12 +933,6 @@ namespace pharmacy_management_1
                     , MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            if (requirQty > selectedMedicine.Quantity)
-            {
-                MessageBox.Show($"the requested quantity is not available ! max available quantity is : {selectedMedicine.Quantity}", "Stock Alert"
-                    , MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
             InvoiceItem existingItem = null;
 
             for (int i = 0; i < DataStore.cartList.Count; i++)
@@ -998,16 +943,28 @@ namespace pharmacy_management_1
                     break;
                 }
             }
+            int alreadyInCartQty;
             if (existingItem != null)
             {
-                if (existingItem.Quantity + requirQty > selectedMedicine.Quantity)
-                {
-                    MessageBox.Show($"total selected quantity for this item exceeds the available stock ! max available quantity is : {selectedMedicine.Quantity}", "Stock Alert"
-                   , MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
+                alreadyInCartQty = existingItem.Quantity;
+            }
+            else
+            {
+                alreadyInCartQty = 0;
+            }
+            int totalRequestedQty = alreadyInCartQty + requirQty;
+            if (totalRequestedQty > selectedMedicine.Quantity)
+            {
+                MessageBox.Show($"the requested quantity is not available ! max available quantity is : {selectedMedicine.Quantity}", "Stock Alert"
+                    , MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (existingItem != null)
+            {
                 existingItem.Quantity += requirQty;
                 existingItem.TotalPrice = (decimal)existingItem.Quantity * existingItem.Price;
+
             }
             else
             {
@@ -1019,10 +976,10 @@ namespace pharmacy_management_1
                     TotalPrice = (decimal)requirQty * (decimal)selectedMedicine.Price
                 };
                 DataStore.cartList.Add(newItem);
-                UpdateCartGrid();
-                txt_PosQuantity.Text = "";
-                txt_PosQuantity.Focus();
             }
+            UpdateCartGrid();
+            txt_PosQuantity.Text = "";
+            txt_PosQuantity.Focus();
         }
         private void UpdateCartGrid()
         {
@@ -1108,64 +1065,168 @@ namespace pharmacy_management_1
                     item.Medicine.Quantity = item.Medicine.Quantity - item.Quantity;
                 }
             }
-                MessageBox.Show("Invoice saved successfully ant stock has been update", "Success"
-                    , MessageBoxButtons.OK, MessageBoxIcon.Information);
-                DataStore.cartList.Clear();
-                UpdateCartGrid();
-            
+            MessageBox.Show("Invoice saved successfully ant stock has been update", "Success"
+                , MessageBoxButtons.OK, MessageBoxIcon.Information);
+            DataStore.cartList.Clear();
+            UpdateCartGrid();
+
             UpdateInvoicesGrid();
         }
-        private void UpdateInvoicesGrid()
+       
+        private void dgv_users_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            dgv_invoices.DataSource = null;
-            dgv_invoices.DataSource = DataStore.InvoicesList;
-            if (dgv_invoices.Columns.Count > 0)
+            if (dgv_users.CurrentRow != null && dgv_users.CurrentRow.DataBoundItem != null)
             {
-                if (dgv_invoices.Columns["Id"]!=null) dgv_invoices.Columns["Id"].HeaderText = "Id";
-                if (dgv_invoices.Columns["Date"] != null) dgv_invoices.Columns["Date"].HeaderText = "Date";
-                if (dgv_invoices.Columns["TotalAmount"] != null) dgv_invoices.Columns["TotalAmount"].HeaderText = "TotalAmount";
-                if (dgv_invoices.Columns["Items"] != null)
+                Users u = (Users)dgv_users.CurrentRow.DataBoundItem;
+                txt_newusername.Text = u.UserName;
+                txt_newpassword.Text = u.Password;
+                if (u.Role != null)
                 {
-                    dgv_invoices.Columns["Items"].Visible = false;
+                    cmb_Role.Text = u.Role.ToString();
                 }
             }
-            decimal totalSales = 0;
+        }
+
+        private void dgv_invoices_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0 || dgv_invoices.Rows[e.RowIndex].Cells["Id"].Value == null)
+            {
+                return;
+            }
+            DataGridViewRow selectedRow = dgv_invoices.Rows[e.RowIndex];
+            int selectedInvoiceId = Convert.ToInt32(selectedRow.Cells["Id"].Value);
+            Invoice clickedInvoice = null;
 
             for (int i = 0; i < DataStore.InvoicesList.Count; i++)
             {
-                totalSales = totalSales + DataStore.InvoicesList[i].TotalAmount;
+                if (DataStore.InvoicesList[i].Id == selectedInvoiceId)
+                {
+                    clickedInvoice = DataStore.InvoicesList[i];
+                    break;
+                }
             }
-            txt_totalSales.Text = totalSales.ToString();
-        }
-
-        private void dgv_invoices_SelectionChanged(object sender, EventArgs e)
-        {
-            if(dgv_invoices.CurrentRow==null || dgv_invoices.CurrentRow.Index <0 
-                || DataStore.InvoicesList.Count==0)
+            if (clickedInvoice != null && clickedInvoice.Items != null)
             {
                 dgv_invoiceDetails.DataSource = null;
-                return;
+                dgv_invoiceDetails.DataSource = clickedInvoice.Items;
+                if (dgv_invoiceDetails.Columns.Count > 0)
+                {
+                    if (dgv_invoiceDetails.Columns["MedicineName"] != null)
+                    { dgv_invoiceDetails.Columns["MedicineName"].HeaderText = "Medicine Name"; }
+                    if (dgv_invoiceDetails.Columns["Quantity"] != null)
+                    { dgv_invoiceDetails.Columns["Guantity"].HeaderText = "Quantity"; }
+                    if (dgv_invoiceDetails.Columns["Price"] != null)
+                    { dgv_invoiceDetails.Columns["Price"].HeaderText = "Price"; }
+                    if (dgv_invoiceDetails.Columns["TotalPrice"] != null)
+                    { dgv_invoiceDetails.Columns["TotalPrice"].HeaderText = "TotalPrice"; }
+                    if (dgv_invoiceDetails.Columns["Medicine"] != null)
+                    { dgv_invoiceDetails.Columns["Medicine"].Visible = false; }
+                }
             }
-            int selectedIndex = dgv_invoices.CurrentRow.Index ;
-            Invoice selectedInvoice = DataStore.InvoicesList[selectedIndex];
+        }
 
-            dgv_invoiceDetails.DataSource = null;
-            dgv_invoiceDetails.DataSource = selectedInvoice.Items;
+        private void dgv_invoices_RowEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0 || dgv_invoices.Rows.Count == 0) return;
+        }
 
-            if (dgv_invoiceDetails.Columns.Count > 0)
+        private void dgv_invoiceDetails_RowEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0 || dgv_invoiceDetails.Rows.Count == 0) return;
+        }
+
+        private void dgv_invoices_CellClick_1(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0 || dgv_invoices.Rows.Count == 0) return;
+            try
             {
-                if (dgv_invoiceDetails.Columns["MedicineName"]!= null)
+                DataGridViewRow selectedRow = dgv_invoices.Rows[e.RowIndex];
+
+                if (selectedRow.Cells["Id"].Value != null)
                 {
-                    dgv_invoiceDetails.Columns["MedicineName"].HeaderText = "MedicineName";
+                    int selectedInvoiceId = Convert.ToInt32(selectedRow.Cells["Id"].Value);
+                    Invoice clickedInvoice = null;
+
+                    for (int i = 0; i < DataStore.InvoicesList.Count; i++)
+                    {
+                        if (DataStore.InvoicesList[i].Id == selectedInvoiceId)
+                        {
+                            clickedInvoice = DataStore.InvoicesList[i];
+                            break;
+                        }
+                    }
+
+                    if (clickedInvoice != null && clickedInvoice.Items != null)
+                    {
+                        dgv_invoiceDetails.DataSource = null;
+                        dgv_invoiceDetails.DataSource = clickedInvoice.Items;
+                        dgv_invoiceDetails.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+
+                        if (dgv_invoiceDetails.Columns.Count > 0)
+                        {
+                            if (dgv_invoiceDetails.Columns["MedicineName"] != null)
+                                dgv_invoiceDetails.Columns["MedicineName"].HeaderText = "Medicine Name";
+
+                            if (dgv_invoiceDetails.Columns["Quantity"] != null)
+                                dgv_invoiceDetails.Columns["Quantity"].HeaderText = "Quantity";
+
+                            if (dgv_invoiceDetails.Columns["Price"] != null)
+                                dgv_invoiceDetails.Columns["Price"].HeaderText = "Price";
+
+                            if (dgv_invoiceDetails.Columns["TotalPrice"] != null)
+                                dgv_invoiceDetails.Columns["TotalPrice"].HeaderText = "Total Price";
+
+                            if (dgv_invoiceDetails.Columns["Medicine"] != null)
+                                dgv_invoiceDetails.Columns["Medicine"].Visible = false;
+                        }
+                    }
                 }
-                dgv_invoiceDetails.Columns["Quantity"].HeaderText = "Quantity";
-                dgv_invoiceDetails.Columns["Price"].HeaderText = "Price";
-                dgv_invoiceDetails.Columns["TotalPrice"].HeaderText = "Total Price";
-                if (dgv_invoiceDetails.Columns["Medicine"]!= null)
+            }
+            catch (Exception)
+            {
+
+            }
+        }
+        private void UpdateInvoicesGrid()
+        {
+            try
+            {
+                dgv_invoices.DataSource = null;
+                decimal totalSales = 0;
+
+                if (DataStore.InvoicesList != null && DataStore.InvoicesList.Count > 0)
                 {
-                    dgv_invoiceDetails.Columns["Medicine"].Visible = false;
+                    dgv_invoices.DataSource = DataStore.InvoicesList;
+                    dgv_invoices.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+
+                    if (dgv_invoices.Columns.Count > 0)
+                    {
+                        if (dgv_invoices.Columns["Id"] != null)
+                            dgv_invoices.Columns["Id"].HeaderText = "Invoice ID";
+
+                        if (dgv_invoices.Columns["Date"] != null)
+                            dgv_invoices.Columns["Date"].HeaderText = "Date";
+
+                        if (dgv_invoices.Columns["TotalAmount"] != null)
+                            dgv_invoices.Columns["TotalAmount"].HeaderText = "Total Price";
+
+                        if (dgv_invoices.Columns["Items"] != null)
+                            dgv_invoices.Columns["Items"].Visible = false;
+                    }
+
+                    dgv_invoices.ClearSelection();
+                    for (int i = 0;i < DataStore.InvoicesList.Count;i++)
+                    {
+                        totalSales += DataStore.InvoicesList[i].TotalAmount;
+                    }
+                    txt_totalSales.Text = totalSales.ToString();
                 }
 
+                dgv_invoiceDetails.DataSource = null;
+            }
+            catch (Exception)
+            {
+                dgv_invoices.DataSource = null;
             }
         }
     }

@@ -14,5 +14,6 @@ namespace pharmacy_management_1.Managers
         public DateTime Date { get; set; } 
         public List<InvoiceItem> Items { get; set; }
         public decimal TotalAmount { get; set; } 
+
     }
 }

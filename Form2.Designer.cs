@@ -311,13 +311,13 @@
             // guna2TabControl1
             // 
             guna2TabControl1.Alignment = TabAlignment.Left;
+            guna2TabControl1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             guna2TabControl1.Controls.Add(tabPage1);
             guna2TabControl1.Controls.Add(tabPage2);
             guna2TabControl1.Controls.Add(tabPage3);
             guna2TabControl1.Controls.Add(tabPage4);
             guna2TabControl1.Controls.Add(tabPage5);
             guna2TabControl1.Controls.Add(tabPage6);
-            guna2TabControl1.Dock = DockStyle.Fill;
             guna2TabControl1.ItemSize = new Size(0, 1);
             guna2TabControl1.Location = new Point(0, 0);
             guna2TabControl1.Name = "guna2TabControl1";
@@ -372,6 +372,7 @@
             // 
             // btn_ClearFilter
             // 
+            btn_ClearFilter.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             btn_ClearFilter.BorderRadius = 20;
             btn_ClearFilter.CustomizableEdges = customizableEdges1;
             btn_ClearFilter.DisabledState.BorderColor = Color.DarkGray;
@@ -476,6 +477,7 @@
             // 
             // date_expiry
             // 
+            date_expiry.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             date_expiry.BorderColor = Color.FromArgb(64, 138, 113);
             date_expiry.BorderRadius = 20;
             date_expiry.Checked = true;
@@ -495,6 +497,7 @@
             // 
             // txt_scientificename
             // 
+            txt_scientificename.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             txt_scientificename.BorderColor = Color.FromArgb(64, 138, 113);
             txt_scientificename.BorderRadius = 20;
             txt_scientificename.BorderThickness = 2;
@@ -520,6 +523,7 @@
             // 
             // txt_quantity
             // 
+            txt_quantity.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             txt_quantity.BorderColor = Color.FromArgb(64, 138, 113);
             txt_quantity.BorderRadius = 20;
             txt_quantity.BorderThickness = 2;
@@ -545,6 +549,7 @@
             // 
             // txt_Price
             // 
+            txt_Price.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             txt_Price.BorderColor = Color.FromArgb(64, 138, 113);
             txt_Price.BorderRadius = 20;
             txt_Price.BorderThickness = 2;
@@ -570,6 +575,7 @@
             // 
             // btn_showMedicine
             // 
+            btn_showMedicine.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             btn_showMedicine.BorderRadius = 20;
             btn_showMedicine.CustomizableEdges = customizableEdges17;
             btn_showMedicine.DisabledState.BorderColor = Color.DarkGray;
@@ -592,6 +598,7 @@
             // 
             // btn_deleteMedicine
             // 
+            btn_deleteMedicine.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             btn_deleteMedicine.BorderRadius = 20;
             btn_deleteMedicine.CustomizableEdges = customizableEdges19;
             btn_deleteMedicine.DisabledState.BorderColor = Color.DarkGray;
@@ -614,6 +621,7 @@
             // 
             // btn_editMedicine
             // 
+            btn_editMedicine.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             btn_editMedicine.BorderRadius = 20;
             btn_editMedicine.CustomizableEdges = customizableEdges21;
             btn_editMedicine.DisabledState.BorderColor = Color.DarkGray;
@@ -636,6 +644,7 @@
             // 
             // btn_addMedicine
             // 
+            btn_addMedicine.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             btn_addMedicine.BorderRadius = 20;
             btn_addMedicine.CustomizableEdges = customizableEdges23;
             btn_addMedicine.DisabledState.BorderColor = Color.DarkGray;
@@ -658,6 +667,7 @@
             // 
             // cmb_company
             // 
+            cmb_company.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             cmb_company.BackColor = Color.Transparent;
             cmb_company.BorderColor = Color.FromArgb(64, 138, 113);
             cmb_company.BorderRadius = 15;
@@ -679,6 +689,7 @@
             // 
             // txt_businessname
             // 
+            txt_businessname.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             txt_businessname.BorderColor = Color.FromArgb(64, 138, 113);
             txt_businessname.BorderRadius = 20;
             txt_businessname.BorderThickness = 2;
@@ -730,7 +741,7 @@
             dgv_medicine.ReadOnly = true;
             dgv_medicine.RowHeadersVisible = false;
             dgv_medicine.RowHeadersWidth = 35;
-            dgv_medicine.Size = new Size(632, 598);
+            dgv_medicine.Size = new Size(648, 595);
             dgv_medicine.TabIndex = 0;
             dgv_medicine.Theme = Guna.UI2.WinForms.Enums.DataGridViewPresetThemes.Light;
             dgv_medicine.ThemeStyle.AlternatingRowsStyle.BackColor = Color.FromArgb(247, 248, 249);
@@ -770,6 +781,7 @@
             // 
             // btn_destroy
             // 
+            btn_destroy.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             btn_destroy.BorderRadius = 20;
             btn_destroy.CustomizableEdges = customizableEdges29;
             btn_destroy.DisabledState.BorderColor = Color.DarkGray;
@@ -792,11 +804,12 @@
             dgv_expiredMedicines.AllowUserToAddRows = false;
             dataGridViewCellStyle4.BackColor = Color.FromArgb(247, 248, 249);
             dgv_expiredMedicines.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
+            dgv_expiredMedicines.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dataGridViewCellStyle5.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle5.BackColor = Color.FromArgb(232, 234, 237);
             dataGridViewCellStyle5.Font = new Font("Segoe UI", 9F);
             dataGridViewCellStyle5.ForeColor = Color.Black;
-            dataGridViewCellStyle5.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionBackColor = Color.FromArgb(64, 138, 113);
             dataGridViewCellStyle5.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle5.WrapMode = DataGridViewTriState.True;
             dgv_expiredMedicines.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
@@ -861,6 +874,7 @@
             // 
             // label1
             // 
+            label1.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             label1.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label1.ForeColor = Color.FromArgb(64, 138, 113);
             label1.Location = new Point(749, 544);
@@ -871,6 +885,7 @@
             // 
             // btn_PosRemove
             // 
+            btn_PosRemove.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             btn_PosRemove.BorderRadius = 20;
             btn_PosRemove.CustomizableEdges = customizableEdges31;
             btn_PosRemove.DisabledState.BorderColor = Color.DarkGray;
@@ -893,6 +908,7 @@
             // 
             // btn_PosSave
             // 
+            btn_PosSave.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             btn_PosSave.BorderRadius = 20;
             btn_PosSave.CustomizableEdges = customizableEdges33;
             btn_PosSave.DisabledState.BorderColor = Color.DarkGray;
@@ -902,6 +918,9 @@
             btn_PosSave.FillColor = Color.FromArgb(64, 138, 113);
             btn_PosSave.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btn_PosSave.ForeColor = Color.White;
+            btn_PosSave.Image = Properties.Resources.bookmark;
+            btn_PosSave.ImageAlign = HorizontalAlignment.Left;
+            btn_PosSave.ImageSize = new Size(30, 30);
             btn_PosSave.Location = new Point(840, 386);
             btn_PosSave.Name = "btn_PosSave";
             btn_PosSave.ShadowDecoration.CustomizableEdges = customizableEdges34;
@@ -912,6 +931,7 @@
             // 
             // btn_PosAdd
             // 
+            btn_PosAdd.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             btn_PosAdd.BorderRadius = 20;
             btn_PosAdd.CustomizableEdges = customizableEdges35;
             btn_PosAdd.DisabledState.BorderColor = Color.DarkGray;
@@ -934,6 +954,7 @@
             // 
             // cmb_PosMedicine
             // 
+            cmb_PosMedicine.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             cmb_PosMedicine.BackColor = Color.Transparent;
             cmb_PosMedicine.BorderColor = Color.FromArgb(64, 138, 113);
             cmb_PosMedicine.BorderRadius = 15;
@@ -955,6 +976,7 @@
             // 
             // txt_PosTotal
             // 
+            txt_PosTotal.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             txt_PosTotal.BorderColor = Color.FromArgb(64, 138, 113);
             txt_PosTotal.BorderRadius = 20;
             txt_PosTotal.BorderThickness = 2;
@@ -982,6 +1004,7 @@
             // 
             // txt_PosQuantity
             // 
+            txt_PosQuantity.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             txt_PosQuantity.BorderColor = Color.FromArgb(64, 138, 113);
             txt_PosQuantity.BorderRadius = 20;
             txt_PosQuantity.BorderThickness = 2;
@@ -1007,6 +1030,7 @@
             // 
             // txt_PosPrice
             // 
+            txt_PosPrice.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             txt_PosPrice.BorderColor = Color.FromArgb(64, 138, 113);
             txt_PosPrice.BorderRadius = 20;
             txt_PosPrice.BorderThickness = 2;
@@ -1035,11 +1059,12 @@
             // 
             dataGridViewCellStyle7.BackColor = Color.White;
             dgv_PosCart.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle7;
+            dgv_PosCart.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dataGridViewCellStyle8.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.BackColor = Color.FromArgb(100, 88, 255);
-            dataGridViewCellStyle8.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle8.BackColor = Color.FromArgb(64, 138, 113);
+            dataGridViewCellStyle8.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
             dataGridViewCellStyle8.ForeColor = Color.White;
-            dataGridViewCellStyle8.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionBackColor = Color.FromArgb(64, 138, 113);
             dataGridViewCellStyle8.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle8.WrapMode = DataGridViewTriState.True;
             dgv_PosCart.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle8;
@@ -1145,10 +1170,10 @@
             dgv_invoiceDetails.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle10;
             dgv_invoiceDetails.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
             dataGridViewCellStyle11.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle11.BackColor = Color.FromArgb(100, 88, 255);
-            dataGridViewCellStyle11.Font = new Font("Impact", 16.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle11.BackColor = Color.FromArgb(64, 138, 113);
+            dataGridViewCellStyle11.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             dataGridViewCellStyle11.ForeColor = Color.White;
-            dataGridViewCellStyle11.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle11.SelectionBackColor = Color.FromArgb(64, 138, 113);
             dataGridViewCellStyle11.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle11.WrapMode = DataGridViewTriState.True;
             dgv_invoiceDetails.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle11;
@@ -1156,10 +1181,10 @@
             dgv_invoiceDetails.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
             dataGridViewCellStyle12.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle12.BackColor = Color.White;
-            dataGridViewCellStyle12.Font = new Font("Impact", 16.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle12.ForeColor = Color.FromArgb(71, 69, 94);
+            dataGridViewCellStyle12.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle12.ForeColor = Color.Black;
             dataGridViewCellStyle12.SelectionBackColor = Color.FromArgb(231, 229, 255);
-            dataGridViewCellStyle12.SelectionForeColor = Color.FromArgb(71, 69, 94);
+            dataGridViewCellStyle12.SelectionForeColor = Color.Black;
             dataGridViewCellStyle12.WrapMode = DataGridViewTriState.False;
             dgv_invoiceDetails.DefaultCellStyle = dataGridViewCellStyle12;
             dgv_invoiceDetails.GridColor = Color.FromArgb(231, 229, 255);
@@ -1198,10 +1223,10 @@
             dgv_invoices.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle13;
             dgv_invoices.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
             dataGridViewCellStyle14.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle14.BackColor = Color.FromArgb(100, 88, 255);
-            dataGridViewCellStyle14.Font = new Font("Impact", 16.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle14.BackColor = Color.FromArgb(64, 138, 113);
+            dataGridViewCellStyle14.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
             dataGridViewCellStyle14.ForeColor = Color.White;
-            dataGridViewCellStyle14.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle14.SelectionBackColor = Color.FromArgb(64, 138, 113);
             dataGridViewCellStyle14.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle14.WrapMode = DataGridViewTriState.True;
             dgv_invoices.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle14;
@@ -1209,10 +1234,10 @@
             dgv_invoices.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
             dataGridViewCellStyle15.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle15.BackColor = Color.White;
-            dataGridViewCellStyle15.Font = new Font("Impact", 16.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle15.ForeColor = Color.FromArgb(71, 69, 94);
+            dataGridViewCellStyle15.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle15.ForeColor = Color.Black;
             dataGridViewCellStyle15.SelectionBackColor = Color.FromArgb(231, 229, 255);
-            dataGridViewCellStyle15.SelectionForeColor = Color.FromArgb(71, 69, 94);
+            dataGridViewCellStyle15.SelectionForeColor = Color.Black;
             dataGridViewCellStyle15.WrapMode = DataGridViewTriState.False;
             dgv_invoices.DefaultCellStyle = dataGridViewCellStyle15;
             dgv_invoices.GridColor = Color.FromArgb(231, 229, 255);
@@ -1244,7 +1269,7 @@
             dgv_invoices.ThemeStyle.RowsStyle.Height = 29;
             dgv_invoices.ThemeStyle.RowsStyle.SelectionBackColor = Color.FromArgb(231, 229, 255);
             dgv_invoices.ThemeStyle.RowsStyle.SelectionForeColor = Color.FromArgb(71, 69, 94);
-            dgv_invoices.SelectionChanged += dgv_invoices_SelectionChanged;
+            dgv_invoices.CellClick += dgv_invoices_CellClick_1;
             // 
             // tabPage5
             // 
@@ -1276,6 +1301,7 @@
             // 
             // txt_companyPhone
             // 
+            txt_companyPhone.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             txt_companyPhone.BorderColor = Color.FromArgb(64, 138, 113);
             txt_companyPhone.BorderRadius = 20;
             txt_companyPhone.BorderThickness = 2;
@@ -1301,6 +1327,7 @@
             // 
             // txt_companyName
             // 
+            txt_companyName.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             txt_companyName.BorderColor = Color.FromArgb(64, 138, 113);
             txt_companyName.BorderRadius = 20;
             txt_companyName.BorderThickness = 2;
@@ -1326,6 +1353,7 @@
             // 
             // btn_showCompany
             // 
+            btn_showCompany.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             btn_showCompany.BorderRadius = 20;
             btn_showCompany.CustomizableEdges = customizableEdges51;
             btn_showCompany.DisabledState.BorderColor = Color.DarkGray;
@@ -1348,6 +1376,7 @@
             // 
             // btn_deleteCompany
             // 
+            btn_deleteCompany.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             btn_deleteCompany.BorderRadius = 20;
             btn_deleteCompany.CustomizableEdges = customizableEdges53;
             btn_deleteCompany.DisabledState.BorderColor = Color.DarkGray;
@@ -1370,6 +1399,7 @@
             // 
             // btn_editCompany
             // 
+            btn_editCompany.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             btn_editCompany.BorderRadius = 20;
             btn_editCompany.CustomizableEdges = customizableEdges55;
             btn_editCompany.DisabledState.BorderColor = Color.DarkGray;
@@ -1392,6 +1422,7 @@
             // 
             // btn_addCompany
             // 
+            btn_addCompany.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             btn_addCompany.BorderRadius = 20;
             btn_addCompany.CustomizableEdges = customizableEdges57;
             btn_addCompany.DisabledState.BorderColor = Color.DarkGray;
@@ -1419,6 +1450,7 @@
             dataGridViewCellStyle16.Font = new Font("Tahoma", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             dataGridViewCellStyle16.ForeColor = Color.White;
             dgv_company.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle16;
+            dgv_company.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dataGridViewCellStyle17.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle17.BackColor = Color.FromArgb(64, 138, 113);
             dataGridViewCellStyle17.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
@@ -1513,6 +1545,7 @@
             dataGridViewCellStyle20.Font = new Font("Tahoma", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             dataGridViewCellStyle20.ForeColor = Color.White;
             dgv_users.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle20;
+            dgv_users.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dataGridViewCellStyle21.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle21.BackColor = Color.FromArgb(64, 138, 113);
             dataGridViewCellStyle21.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
@@ -1532,7 +1565,7 @@
             dataGridViewCellStyle22.WrapMode = DataGridViewTriState.False;
             dgv_users.DefaultCellStyle = dataGridViewCellStyle22;
             dgv_users.GridColor = Color.FromArgb(231, 229, 255);
-            dgv_users.Location = new Point(-2, 87);
+            dgv_users.Location = new Point(3, 83);
             dgv_users.Name = "dgv_users";
             dgv_users.ReadOnly = true;
             dgv_users.RightToLeft = RightToLeft.No;
@@ -1569,9 +1602,11 @@
             dgv_users.ThemeStyle.RowsStyle.Height = 29;
             dgv_users.ThemeStyle.RowsStyle.SelectionBackColor = Color.FromArgb(231, 229, 255);
             dgv_users.ThemeStyle.RowsStyle.SelectionForeColor = Color.FromArgb(71, 69, 94);
+            dgv_users.CellClick += dgv_users_CellClick;
             // 
             // btn_showUser
             // 
+            btn_showUser.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             btn_showUser.BorderRadius = 20;
             btn_showUser.CustomizableEdges = customizableEdges59;
             btn_showUser.DisabledState.BorderColor = Color.DarkGray;
@@ -1594,6 +1629,7 @@
             // 
             // btn_deleteUser
             // 
+            btn_deleteUser.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             btn_deleteUser.BorderRadius = 20;
             btn_deleteUser.CustomizableEdges = customizableEdges61;
             btn_deleteUser.DisabledState.BorderColor = Color.DarkGray;
@@ -1616,6 +1652,7 @@
             // 
             // dtn_editUser
             // 
+            dtn_editUser.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             dtn_editUser.BorderRadius = 20;
             dtn_editUser.CustomizableEdges = customizableEdges63;
             dtn_editUser.DisabledState.BorderColor = Color.DarkGray;
@@ -1638,6 +1675,7 @@
             // 
             // btn_addUser
             // 
+            btn_addUser.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             btn_addUser.BorderRadius = 20;
             btn_addUser.CustomizableEdges = customizableEdges65;
             btn_addUser.DisabledState.BorderColor = Color.DarkGray;
@@ -1660,6 +1698,7 @@
             // 
             // cmb_Role
             // 
+            cmb_Role.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             cmb_Role.BackColor = Color.Transparent;
             cmb_Role.BorderColor = Color.FromArgb(64, 138, 113);
             cmb_Role.BorderRadius = 15;
@@ -1682,6 +1721,7 @@
             // 
             // txt_newpassword
             // 
+            txt_newpassword.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             txt_newpassword.BorderColor = Color.FromArgb(64, 138, 113);
             txt_newpassword.BorderRadius = 20;
             txt_newpassword.BorderThickness = 2;
@@ -1708,6 +1748,7 @@
             // 
             // txt_newusername
             // 
+            txt_newusername.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             txt_newusername.BorderColor = Color.FromArgb(64, 138, 113);
             txt_newusername.BorderRadius = 20;
             txt_newusername.BorderThickness = 2;
@@ -1765,7 +1806,7 @@
             btn_users.HoverState.FillColor = Color.FromArgb(159, 203, 173);
             btn_users.Image = Properties.Resources._1946429;
             btn_users.ImageSize = new Size(70, 70);
-            btn_users.Location = new Point(5, 504);
+            btn_users.Location = new Point(5, 592);
             btn_users.Name = "btn_users";
             btn_users.ShadowDecoration.CustomizableEdges = customizableEdges75;
             btn_users.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
@@ -1788,7 +1829,7 @@
             btn_Companies.HoverState.FillColor = Color.FromArgb(159, 203, 173);
             btn_Companies.Image = Properties.Resources._4709457_1_1;
             btn_Companies.ImageSize = new Size(60, 60);
-            btn_Companies.Location = new Point(5, 405);
+            btn_Companies.Location = new Point(5, 480);
             btn_Companies.Name = "btn_Companies";
             btn_Companies.ShadowDecoration.CustomizableEdges = customizableEdges76;
             btn_Companies.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
@@ -1811,7 +1852,7 @@
             btn_Medicines.HoverState.FillColor = Color.FromArgb(159, 203, 173);
             btn_Medicines.Image = Properties.Resources._647135;
             btn_Medicines.ImageSize = new Size(60, 60);
-            btn_Medicines.Location = new Point(5, 9);
+            btn_Medicines.Location = new Point(5, 32);
             btn_Medicines.Name = "btn_Medicines";
             btn_Medicines.ShadowDecoration.CustomizableEdges = customizableEdges77;
             btn_Medicines.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
@@ -1834,7 +1875,7 @@
             btn_Bills.HoverState.FillColor = Color.FromArgb(159, 203, 173);
             btn_Bills.Image = Properties.Resources._178771371;
             btn_Bills.ImageSize = new Size(60, 60);
-            btn_Bills.Location = new Point(5, 306);
+            btn_Bills.Location = new Point(5, 368);
             btn_Bills.Name = "btn_Bills";
             btn_Bills.ShadowDecoration.CustomizableEdges = customizableEdges78;
             btn_Bills.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
@@ -1857,7 +1898,7 @@
             btn_expired.HoverState.FillColor = Color.FromArgb(159, 203, 173);
             btn_expired.Image = Properties.Resources._2824340;
             btn_expired.ImageSize = new Size(60, 60);
-            btn_expired.Location = new Point(5, 108);
+            btn_expired.Location = new Point(5, 144);
             btn_expired.Name = "btn_expired";
             btn_expired.ShadowDecoration.CustomizableEdges = customizableEdges79;
             btn_expired.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
@@ -1880,7 +1921,7 @@
             btn_pos.HoverState.FillColor = Color.FromArgb(159, 203, 173);
             btn_pos.Image = Properties.Resources._2543369;
             btn_pos.ImageSize = new Size(60, 60);
-            btn_pos.Location = new Point(5, 207);
+            btn_pos.Location = new Point(5, 256);
             btn_pos.Name = "btn_pos";
             btn_pos.ShadowDecoration.CustomizableEdges = customizableEdges80;
             btn_pos.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;

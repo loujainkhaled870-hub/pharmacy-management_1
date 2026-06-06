@@ -48,18 +48,14 @@ namespace pharmacy_management_1.Managers
         }
         public void DeleteUser(int id)
         {
-            Users delete = null;
+            
 
             for (int i = 0; i < DataStore.UsersList.Count; i++)
             {
                 if (DataStore.UsersList[i].Id == id)
                 {
-                    delete = DataStore.UsersList[i];
+                    DataStore.UsersList.Remove(DataStore.UsersList[i]);
                     break;
-                }
-                if(delete != null)
-                {
-                    DataStore.UsersList.Remove(delete);
                 }
             }
         }
