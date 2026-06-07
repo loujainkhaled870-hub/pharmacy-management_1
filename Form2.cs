@@ -77,6 +77,12 @@ namespace pharmacy_management_1
         //////////////////////////////////////////////////////////////////
         private void btn_showUser_Click(object sender, EventArgs e)
         {
+            if (DataStore.CurrentUser == null || DataStore.CurrentUser.Role != UserRole.SuperAdmin)
+            {
+                MessageBox.Show("Acccess Denied! only SuperAdmin is allowed to show user ", "Security Error"
+                   , MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                return;
+            }
             UsersManager manager = new UsersManager();
             dgv_users.DataSource = null;
             dgv_users.DataSource = manager.GetAllUser();
@@ -1192,6 +1198,11 @@ namespace pharmacy_management_1
             try
             {
                 dgv_invoices.DataSource = null;
+                if ( DataStore.CurrentUser.Role != UserRole.SuperAdmin)
+                {
+                    return;
+                }
+
                 decimal totalSales = 0;
 
                 if (DataStore.InvoicesList != null && DataStore.InvoicesList.Count > 0)

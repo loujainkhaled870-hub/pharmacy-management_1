@@ -108,14 +108,6 @@ namespace pharmacy_management_1
                 txt_password.IconLeft = Properties.Resources.eye_close;
             }
         }
-
-        //private void btn_login_Click(object sender, EventArgs e)
-        //{
-        //    Form2 dashboard = new Form2();
-        //    dashboard.Show();
-        //    this.Hide();
-        //}
-
         private void Form1_Load(object sender, EventArgs e)
         {
 
@@ -125,19 +117,41 @@ namespace pharmacy_management_1
         {
             string username = txt_user.Text.Trim();
             string password = txt_password.Text.Trim();
+            if(username=="" || password == "")
+            {
+                MessageBox.Show("please fill in all fields","Validation Error"
+                    ,MessageBoxButtons.OK,MessageBoxIcon.Warning);
+                return;
+            }
             UsersManager usersManager = new UsersManager();
+            bool usernameExists = false;
+            for (int i = 0; i < DataStore.UsersList.Count; i++)
+            {
+                if (DataStore.UsersList[i].UserName.Trim().ToLower() == username.ToLower())
+                {
+                    usernameExists = true;
+                    break;
+                }
+            }
+
+            if (!usernameExists)
+            {
+                MessageBox.Show("Invalid username. This user does not exist.", "Login Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             Users user = usersManager.Login(username, password);
+
             if (user != null)
             {
                 Form2 dashboard = new Form2();
                 dashboard.Show();
                 this.Hide();
             }
-            else 
+            else
             {
-                MessageBox.Show("Invalid username or password.", "Login Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Incorrect password. Please try again.", "Login Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-           
         }
     }
+    
 }
